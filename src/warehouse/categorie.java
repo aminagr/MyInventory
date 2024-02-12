@@ -69,7 +69,6 @@ public class categorie extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         catnom = new javax.swing.JTextField();
         addcat = new javax.swing.JButton();
         updatebt = new javax.swing.JButton();
@@ -81,10 +80,23 @@ public class categorie extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         r_c = new javax.swing.JTextField();
         bt_r = new javax.swing.JButton();
-        edit = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         deletecat = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Nom");
+
+        catnom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                catnomActionPerformed(evt);
+            }
+        });
 
         addcat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/save-16.png"))); // NOI18N
         addcat.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +123,7 @@ public class categorie extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(updatebt)
                     .addComponent(addcat))
-                .addGap(0, 104, Short.MAX_VALUE))
+                .addGap(0, 154, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
@@ -119,12 +131,9 @@ public class categorie extends javax.swing.JPanel {
                 .addComponent(catnom))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(idlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(idfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(idlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(idfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -138,13 +147,11 @@ public class categorie extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(catnom, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(57, 57, 57)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(64, 64, 64)
                 .addComponent(addcat)
                 .addGap(18, 18, 18)
                 .addComponent(updatebt)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TableCat.setModel(new javax.swing.table.DefaultTableModel(
@@ -159,6 +166,8 @@ public class categorie extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(TableCat);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setText("Rechercher ");
 
@@ -186,7 +195,7 @@ public class categorie extends javax.swing.JPanel {
                 .addComponent(r_c, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_r)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,15 +206,47 @@ public class categorie extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(r_c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/edit-16.png"))); // NOI18N
-        edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editActionPerformed(evt);
-            }
-        });
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel9.setText("GERER LES CATEGORIES");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(0, 256, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 146, Short.MAX_VALUE)))
+                .addGap(45, 45, 45))
+        );
 
         deletecat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/delete-16.png"))); // NOI18N
         deletecat.addActionListener(new java.awt.event.ActionListener() {
@@ -214,189 +255,156 @@ public class categorie extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(edit)
-                .addGap(122, 122, 122)
-                .addComponent(deletecat)
-                .addGap(150, 150, 150))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edit)
-                    .addComponent(deletecat))
-                .addGap(113, 113, 113))
-        );
+        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/edit-16.png"))); // NOI18N
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(56, 56, 56))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(edit)
+                .addGap(93, 93, 93)
+                .addComponent(deletecat)
+                .addGap(227, 227, 227))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deletecat)
+                    .addComponent(edit))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addcatActionPerformed
-
-
-String cat_nom = catnom.getText();
-Category c = new Category();
-c.setName(cat_nom);
-     CategoryDAO caa = new CategoryDAO();
-
-caa.addCategory(c);
- refreshTable();
-JOptionPane.showMessageDialog(null, "Catégorie ajoutée");
-    }//GEN-LAST:event_addcatActionPerformed
-
-    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-   
-        
- int index = TableCat.getSelectedRow();
-        if (index != -1) {
-        TableModel model = TableCat.getModel();
-    
-         int id = (int) model.getValueAt(index,0);   
-        String nom = (String) model.getValueAt(index,1);
-          String idd = Integer.toString(id);
-       catnom.setText(nom); 
-        
-      idfield.setVisible(true);
-        idlabel.setVisible(true);
-        
-        idfield.setText(idd);
-       addcat.setVisible(false);                                         
-        updatebt.setVisible(true);
-        
-       
-       // RefreshTable2();
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "veuillez selectionner une catégorie à éditer.");
-        }
-
-
-
-
-
-    }//GEN-LAST:event_editActionPerformed
-
     private void deletecatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletecatActionPerformed
-
-
-
 
         int index = TableCat.getSelectedRow();
         if (index != -1) {
-        TableModel model = TableCat.getModel();
-        int id = (int) model.getValueAt(index,0);
-       
-        CategoryDAO caa = new CategoryDAO();
-        caa.deleteCategory(id);
-           refreshTable();
-        JOptionPane.showMessageDialog(this, "categorie supprimée avec succès");
-        
-     
+            TableModel model = TableCat.getModel();
+            int id = (int) model.getValueAt(index,0);
+
+            CategoryDAO caa = new CategoryDAO();
+            caa.deleteCategory(id);
+            refreshTable();
+            JOptionPane.showMessageDialog(this, "categorie supprimée avec succès");
+
         }
         else {
             JOptionPane.showMessageDialog(this, "veuillez selectionner une catégorie à supprimer.");
         }
-        
-       
+
         /*
         if (selectedRow != -1) {
             int categoryId = (int) TableCat.getValueAt(selectedRow, 0);
             cd.deleteCategory(categoryId);
             JOptionPane.showMessageDialog(this, "categorie supprimée avec succès");
-            
+
             refreshTable();
-           //clearForm();
+            //clearForm();
         } else {
             JOptionPane.showMessageDialog(this, "Please select a row to delete.");
         }
-    
-*/
+
+        */
 
         // TODO add your handling code here:
     }//GEN-LAST:event_deletecatActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+
+        int index = TableCat.getSelectedRow();
+        if (index != -1) {
+            TableModel model = TableCat.getModel();
+
+            int id = (int) model.getValueAt(index,0);
+            String nom = (String) model.getValueAt(index,1);
+            String idd = Integer.toString(id);
+            catnom.setText(nom);
+
+            idfield.setVisible(true);
+            idlabel.setVisible(true);
+
+            idfield.setText(idd);
+            addcat.setVisible(false);
+            updatebt.setVisible(true);
+
+            // RefreshTable2();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "veuillez selectionner une catégorie à éditer.");
+        }
+    }//GEN-LAST:event_editActionPerformed
+
+    private void bt_rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rActionPerformed
+
+        String searchKeyword = r_c.getText();
+
+        CategoryDAO dao = new CategoryDAO();
+        List<Category> searchResults = dao.searchCategory(searchKeyword);
+        updateTable(searchResults);
+        }
+
+        private void updateTable(List<Category> productList) {
+            DefaultTableModel model = (DefaultTableModel) TableCat.getModel();
+            model.setRowCount(0); //
+
+            for (Category product : productList) {
+                model.addRow(new Object[]{product.getId(), product.getName()});
+
+            }
+    }//GEN-LAST:event_bt_rActionPerformed
 
     private void r_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_cActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_r_cActionPerformed
 
-    private void bt_rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rActionPerformed
-       
-        
-        String searchKeyword = r_c.getText();
-
-CategoryDAO dao = new CategoryDAO();
-                List<Category> searchResults = dao.searchCategory(searchKeyword);
-                updateTable(searchResults);
-    }
-
-    
-    private void updateTable(List<Category> productList) {
-        DefaultTableModel model = (DefaultTableModel) TableCat.getModel();
-        model.setRowCount(0); //
-
-        for (Category product : productList) {
-            model.addRow(new Object[]{product.getId(), product.getName()});
-
-              
-        }
-    
-        
-        
-    }//GEN-LAST:event_bt_rActionPerformed
-
     private void updatebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtActionPerformed
-        
+
         String nom = catnom.getText();
         String idd = idfield.getText();
         int id = Integer.parseInt(idd);
         CategoryDAO dao = new CategoryDAO();
         Category c = new Category();
-        
+
         c.setId(id);
         c.setName(nom);
         dao.updateCategory(c);
-         refreshTable();
-         JOptionPane.showMessageDialog(this, "categorie modifiée avec succès"); 
-       addcat.setVisible(true);                                         
-updatebt.setVisible(false);
-        
-       idfield.setVisible(false);
-        idlabel.setVisible(false);
-        
-        
+        refreshTable();
+        JOptionPane.showMessageDialog(this, "categorie modifiée avec succès");
+        addcat.setVisible(true);
+        updatebt.setVisible(false);
 
+        idfield.setVisible(false);
+        idlabel.setVisible(false);
     }//GEN-LAST:event_updatebtActionPerformed
+
+    private void addcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addcatActionPerformed
+
+        String cat_nom = catnom.getText();
+        Category c = new Category();
+        c.setName(cat_nom);
+        CategoryDAO caa = new CategoryDAO();
+
+        caa.addCategory(c);
+        refreshTable();
+        JOptionPane.showMessageDialog(null, "Catégorie ajoutée");
+    }//GEN-LAST:event_addcatActionPerformed
+
+    private void catnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catnomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_catnomActionPerformed
 
     
   
@@ -433,8 +441,8 @@ private void refreshTable() {
     private java.awt.Label idfield;
     private java.awt.Label idlabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
