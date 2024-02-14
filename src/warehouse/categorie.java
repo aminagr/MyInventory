@@ -372,38 +372,69 @@ public class categorie extends javax.swing.JPanel {
 
     private void updatebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtActionPerformed
 
-        String nom = catnom.getText();
-        String idd = idfield.getText();
-        int id = Integer.parseInt(idd);
+      String nom = catnom.getText();
+    String idd = idfield.getText();
+    int id;
+
+    try {
+        id = Integer.parseInt(idd);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Invalid ID. Please enter a valid numeric value.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (nom.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Veuillez remplir le nom de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+
+
         CategoryDAO dao = new CategoryDAO();
         Category c = new Category();
-
         c.setId(id);
         c.setName(nom);
+
         dao.updateCategory(c);
         refreshTable();
-        JOptionPane.showMessageDialog(this, "categorie modifiée avec succès");
+        JOptionPane.showMessageDialog(this, "Catégorie modifiée avec succès");
         addcat.setVisible(true);
         updatebt.setVisible(false);
 
         idfield.setVisible(false);
         idlabel.setVisible(false);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "An error occurred while updating the category.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_updatebtActionPerformed
 
     private void addcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addcatActionPerformed
 
         String cat_nom = catnom.getText();
+
+    if (cat_nom.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Veuillez entrer le nom de la catégorie ", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+    
+
         Category c = new Category();
         c.setName(cat_nom);
-        CategoryDAO caa = new CategoryDAO();
 
+        CategoryDAO caa = new CategoryDAO();
         caa.addCategory(c);
         refreshTable();
         JOptionPane.showMessageDialog(null, "Catégorie ajoutée");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erreur pendant l'insertion.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_addcatActionPerformed
 
     private void catnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catnomActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_catnomActionPerformed
 
     

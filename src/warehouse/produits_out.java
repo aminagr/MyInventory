@@ -26,12 +26,12 @@ import javax.swing.table.TableModel;
  *
  * @author DELL-10
  */
-public class produits extends javax.swing.JPanel {
+public class produits_out extends javax.swing.JPanel {
 
     /**
      * Creates new form clients
      */
-    public produits() {
+    public produits_out() {
         initComponents();
         tb_load();
         combo_load();
@@ -78,7 +78,7 @@ ProviderDAO pddd = new ProviderDAO();
       //    Product p = new Product();
           ProductDAO prd = new ProductDAO();
         
-              List<Product> productList = prd.getAllProducts();
+              List<Product> productList = prd.getOutProducts();
                for (Product product : productList) {
             Object[] rowData = {
                     product.getId(),
@@ -582,64 +582,63 @@ ProductDAO pdao = new ProductDAO();
 
                                      
     String pr_nom = p_nom.getText();
-    String idd = idfield.getText();
-    int id;
+String idd = idfield.getText();
+int id;
 
-    try {
-        id = Integer.parseInt(idd);
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Invalid ID. Please enter a valid numeric value.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+try {
+    id = Integer.parseInt(idd);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Invalid ID. Please enter a valid numeric value.", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
-    String pr_prix_str = p_prix.getText();
-    String pr_qt_str = p_qt.getText();
-    String pr_im = p_i.getText();
-    String pr_code = p_code.getText();
-    String pr_cat = p_cat.getSelectedItem().toString();
-    String pr_f = p_f.getSelectedItem().toString();
+String pr_prix_str = p_prix.getText();
+String pr_qt_str = p_qt.getText();
+String pr_im = p_i.getText();
+String pr_code = p_code.getText();
+String pr_cat = p_cat.getSelectedItem().toString();
+String pr_f = p_f.getSelectedItem().toString();
 
-    if (pr_nom.isEmpty() || pr_prix_str.isEmpty() || pr_qt_str.isEmpty() || pr_im.isEmpty() || pr_code.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+if (pr_nom.isEmpty() || pr_prix_str.isEmpty() || pr_qt_str.isEmpty() || pr_im.isEmpty() || pr_code.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
-    try {
-        double pr_prix = Double.parseDouble(pr_prix_str);
-        int pr_qt = Integer.parseInt(pr_qt_str);
+try {
+    double pr_prix = Double.parseDouble(pr_prix_str);
+    int pr_qt = Integer.parseInt(pr_qt_str);
 
-       
+    CategoryDAO cd = new CategoryDAO();
+    ProviderDAO pd = new ProviderDAO();
+    ProductDAO dao = new ProductDAO();
+    Product p = new Product();
+    int categoryId = cd.getCategoryIdByName(pr_cat);
+    int providerId = pd.getProviderIdByName(pr_f);
 
-        CategoryDAO cd = new CategoryDAO();
-        ProviderDAO pd = new ProviderDAO();
-        ProductDAO dao = new ProductDAO();
-        Product p = new Product();
-        int categoryId = cd.getCategoryIdByName(pr_cat);
-        int providerId = pd.getProviderIdByName(pr_f);
+    p.setId(id);
+    p.setName(pr_nom);
+    p.setQuantity(pr_qt);
+    p.setPrice(pr_prix);
+    p.setCategoryId(categoryId);
+    p.setProviderId(providerId);
+    p.setImages(pr_im);
+    p.setCodeBar(pr_code);
 
-        p.setId(id);
-        p.setName(pr_nom);
-        p.setQuantity(pr_qt);
-        p.setPrice(pr_prix);
-        p.setCategoryId(categoryId);
-        p.setProviderId(providerId);
-        p.setImages(pr_im);
-        p.setCodeBar(pr_code);
+    dao.updateProduct(p);
+    refreshTable();
+    JOptionPane.showMessageDialog(this, "Produit modifié avec succès");
 
-        dao.updateProduct(p);
-        refreshTable();
-        JOptionPane.showMessageDialog(this, "Produit modifié avec succès");
-        add_p.setVisible(true);
-        updatebtn.setVisible(false);
+    // Make sure to handle visibility correctly
+    add_p.setVisible(true);
+    updatebtn.setVisible(false);
 
-        idfield.setVisible(false);
-        idlabel.setVisible(false);
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Qualité ou prix invalide. Veuillez entrer une valeur numérique valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "An error occurred while updating the product.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
+    idfield.setVisible(false);
+    idlabel.setVisible(false);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Qualité ou prix invalide. Veuillez entrer une valeur numérique valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "An error occurred while updating the product.", "Error", JOptionPane.ERROR_MESSAGE);
+}
 
 
     }//GEN-LAST:event_updatebtnActionPerformed
@@ -697,7 +696,7 @@ ProductDAO pdao = new ProductDAO();
     
     private void refreshTable() {
     ProductDAO dao = new ProductDAO();
-    List<Product> productList = dao.getAllProducts();
+    List<Product> productList = dao.getOutProducts();
 
     DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Catégorie", "Prix", "Quantité", "Code", "Fournisseur"}, 0);
 

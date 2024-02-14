@@ -7,15 +7,19 @@ package warehouse;
 
 /**
  *
- * @author DELL-10
+ * @author amina
  */
 public class Warehouse {
 
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+      new login().setVisible(true);
     }
     
 }

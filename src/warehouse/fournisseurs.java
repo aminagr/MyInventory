@@ -346,20 +346,32 @@ public class fournisseurs extends javax.swing.JPanel {
     private void savefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savefActionPerformed
 
 String nom = fnom.getText();
-String mail = fmail.getText();
-String ad = fadd.getText();
-String num = fnum.getText();
+    String mail = fmail.getText();
+    String ad = fadd.getText();
+    String num = fnum.getText();
 
-Provider p = new Provider();
-p.setName(nom);
-p.setPhone(num);
-p.setMail(mail);
-p.setAddress(ad);
-ProviderDAO d = new ProviderDAO();
-d.addProvider(p);
- refreshTable();
-JOptionPane.showMessageDialog(null, "fournisseur ajouté");
-        // TODO add your handling code here:
+    if (nom.isEmpty() || mail.isEmpty() || ad.isEmpty() || num.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+   
+
+        Provider p = new Provider();
+        p.setName(nom);
+        p.setPhone(num);
+        p.setMail(mail);
+        p.setAddress(ad);
+
+        ProviderDAO d = new ProviderDAO();
+        d.addProvider(p);
+        refreshTable();
+        JOptionPane.showMessageDialog(null, "Fournisseur ajouté");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erreur pendant l'insertion.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+      
     }//GEN-LAST:event_savefActionPerformed
 
     private void fnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnumActionPerformed
@@ -425,30 +437,46 @@ ProviderDAO dao = new ProviderDAO();
 
 
 String idd = idfield.getText();
-        int id = Integer.parseInt(idd);
-String nom = fnom.getText();
-String mail = fmail.getText();
-String ad = fadd.getText();
-String num = fnum.getText();
+    int id;
 
+    try {
+        id = Integer.parseInt(idd);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Invalid ID. Please enter a valid numeric value.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-ProviderDAO dao = new ProviderDAO();
+    String nom = fnom.getText();
+    String mail = fmail.getText();
+    String ad = fadd.getText();
+    String num = fnum.getText();
 
-Provider p = new Provider();
-p.setId(id);
-p.setName(nom);
-p.setPhone(num);
-p.setMail(mail);
-p.setAddress(ad);
+    if (nom.isEmpty() || mail.isEmpty() || ad.isEmpty() || num.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-dao.updateProvider(p);
- refreshTable();
- JOptionPane.showMessageDialog(this, "Fournisseur modifié avec succès"); 
- savef.setVisible(true);                                         
-updatebtn.setVisible(false);
-        
-       idfield.setVisible(false);
+    try {
+
+        ProviderDAO dao = new ProviderDAO();
+        Provider p = new Provider();
+        p.setId(id);
+        p.setName(nom);
+        p.setPhone(num);
+        p.setMail(mail);
+        p.setAddress(ad);
+
+        dao.updateProvider(p);
+        refreshTable();
+        JOptionPane.showMessageDialog(this, "Fournisseur modifié avec succès");
+        savef.setVisible(true);
+        updatebtn.setVisible(false);
+
+        idfield.setVisible(false);
         idlabel.setVisible(false);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "An error occurred while updating the provider.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_updatebtnActionPerformed
 
     private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed

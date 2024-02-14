@@ -10,6 +10,11 @@ package dao;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+
+
+
+/*
 public class DatabaseHandler {
    // private static final String URL = "jdbc:mysql://localhost:3306/your_database";
     //private static final String USER = "your_username";
@@ -20,7 +25,7 @@ public class DatabaseHandler {
     public DatabaseHandler() {
         try {
            // connection = DriverManager.getConnection(URL, USER, PASSWORD);
-       connection = DriverManager.getConnection("jdbc:mysql://localhost/warehouse?autoReconnect=true&useSSL=false","root","");
+       connection = DriverManager.getConnection("jdbc:mysql://localhost/warehouse?autoReconnect=true&useSSL=false&","root","");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,7 +36,7 @@ public class DatabaseHandler {
         return connection;
     }
 
-    public void closeConnection() {
+   public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -39,7 +44,39 @@ public class DatabaseHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+   }
+    
+    
+    
+}*/
+
+
+
+
+public class DatabaseHandler implements AutoCloseable {
+
+    private Connection connection;
+
+    public DatabaseHandler() {
+        try {
+            // Initialize the connection here
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/warehouse?autoReconnect=true&useSSL=false&", "root", "");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    @Override
+    public void close() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
 }
+
 
    

@@ -184,7 +184,24 @@ public class ProviderDAO {
         return list;
     }
 
-    
+     
+ public int getTotalCount() {
+    String query = "SELECT COUNT(*) AS total5 FROM fournisseur";
+
+    try (Connection connection = databaseHandler.getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query)) {
+
+        if (resultSet.next()) {
+            return resultSet.getInt("total5");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return 0;
+}
+
     
     
     

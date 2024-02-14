@@ -178,6 +178,23 @@ public class CategoryDAO {
     }
 
     
+     public int getTotalCount() {
+    String query = "SELECT COUNT(*) AS total2 FROM categorie";
+
+    try (Connection connection = databaseHandler.getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query)) {
+
+        if (resultSet.next()) {
+            return resultSet.getInt("total2");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return 0;
+}
+    
     
     
 }
