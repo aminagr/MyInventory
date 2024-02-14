@@ -9,15 +9,18 @@ package dao;
  *
  * @author amina
  */
-public class customer {
-    public class Customer {
+public class Client {
+ 
+    
+  
     private int id;
     private String name;
     private String address;
     private String phone;
     private String mail;
 
-    public Customer(int id, String name, String address, String phone, String mail) {
+  
+    public Client(int id, String name, String address, String phone, String mail) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -25,7 +28,10 @@ public class customer {
         this.mail = mail;
     }
 
-    // Getters and setters
+    public Client(){
+    
+    }
+    // Getter and Setter methods
     public int getId() {
         return id;
     }
@@ -67,4 +73,5 @@ public class customer {
     }
 }
 
-}
+    
+   

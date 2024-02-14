@@ -6,7 +6,7 @@
 package warehouse;
 
 import dao.CategoryDAO;
-import dao.CustomerDAO;
+import dao.ClientDAO;
 import dao.ProductDAO;
 import dao.ProviderDAO;
 
@@ -56,7 +56,7 @@ public class Accueil2 extends javax.swing.JPanel {
         String sn5 = Integer.toString(n5); 
                 nbf.setText(sn5);
         
-         CustomerDAO cs = new CustomerDAO();
+         ClientDAO cs = new ClientDAO();
          int n6 = cs.getTotalCount();
          String sn6 = Integer.toString(n6); 
          nbcl.setText(sn6);
