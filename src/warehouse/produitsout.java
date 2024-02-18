@@ -10,35 +10,43 @@ import dao.Product;
 import dao.ProductDAO;
 import dao.Provider;
 import dao.ProviderDAO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
  *
  * @author DELL-10
  */
-public class produits_low extends javax.swing.JPanel {
+public class produitsout extends javax.swing.JPanel {
 
     /**
      * Creates new form clients
      */
-    public produits_low() {
+    public produitsout() {
         initComponents();
         tb_load();
         combo_load();
                 updatebtn.setVisible(false);
                 idlabel.setVisible(false);
+imagesArea.setVisible(false);
+jScrollPane2.setVisible(false);
 
-        
      // CategoryDAO cddd = new CategoryDAO();
         //   p_cat = new JComboBox<>(cddd.getCategoryNames());
     
@@ -70,16 +78,14 @@ ProviderDAO pddd = new ProviderDAO();
     public void tb_load(){
 
   
-      try {
-          
-          DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-          dt.setRowCount(0);
-          
-      //    Product p = new Product();
-          ProductDAO prd = new ProductDAO();
-        
-              List<Product> productList = prd.getLowProducts();
-               for (Product product : productList) {
+   try {
+        DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        dt.setRowCount(0);
+
+        ProductDAO prd = new ProductDAO();
+        List<Product> productList = prd.getOutProducts();
+
+        for (Product product : productList) {
             Object[] rowData = {
                     product.getId(),
                     product.getName(),
@@ -87,19 +93,22 @@ ProviderDAO pddd = new ProviderDAO();
                     product.getPrice(),
                     product.getQuantity(),
                     product.getCodeBar(),
-                 product.getProviderName(),
-                  //  product.getImages(),
-                
-                  
+                    product.getProviderName(),
+                    product.getImagess().isEmpty() ? "" : product.getImagess().get(0)
+
             };
             dt.addRow(rowData);
         }
-          }
-          
-       catch (Exception e) {
-          System.out.println(e);
-      }
-  
+
+               TableColumn imageColumn = jTable1.getColumnModel().getColumn(7);
+            imageColumn.setCellRenderer(new ImageRenderer());
+
+   
+   
+   } catch (Exception e) {
+        System.out.println(e);
+    }
+
   }
     
     
@@ -113,6 +122,7 @@ ProviderDAO pddd = new ProviderDAO();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -127,12 +137,12 @@ ProviderDAO pddd = new ProviderDAO();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         p_code = new javax.swing.JTextField();
-        p_i = new javax.swing.JTextField();
         p_cat = new javax.swing.JComboBox<>();
         p_f = new javax.swing.JComboBox<>();
         updatebtn = new javax.swing.JButton();
         idlabel = new java.awt.Label();
         idfield = new java.awt.Label();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -141,6 +151,8 @@ ProviderDAO pddd = new ProviderDAO();
         jLabel5 = new javax.swing.JLabel();
         recherche_p = new javax.swing.JTextField();
         r_p_b = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        imagesArea = new javax.swing.JTextArea();
         edit = new javax.swing.JButton();
         delete = new javax.swing.JButton();
 
@@ -157,6 +169,12 @@ ProviderDAO pddd = new ProviderDAO();
         jLabel3.setText("Prix");
 
         jLabel4.setText("Quantité");
+
+        p_nom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                p_nomActionPerformed(evt);
+            }
+        });
 
         p_prix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,12 +201,6 @@ ProviderDAO pddd = new ProviderDAO();
 
         jLabel8.setText("Images");
 
-        p_i.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p_iActionPerformed(evt);
-            }
-        });
-
         p_cat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 p_catActionPerformed(evt);
@@ -210,6 +222,13 @@ ProviderDAO pddd = new ProviderDAO();
 
         idlabel.setText("ID");
 
+        jButton1.setText("Choisir les images");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -221,20 +240,12 @@ ProviderDAO pddd = new ProviderDAO();
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(p_qt, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(p_code))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(p_f, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(p_i))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(33, 33, 33)
@@ -246,7 +257,15 @@ ProviderDAO pddd = new ProviderDAO();
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(p_cat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(p_cat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(p_f, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,26 +309,29 @@ ProviderDAO pddd = new ProviderDAO();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(p_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(p_i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(add_p)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(updatebtn)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(30, 30, 30)
+                        .addComponent(add_p)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updatebtn))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nom", "Catégorie", "Prix", "Quantité", "Code", "Fournisseur"
+                "ID", "Nom", "Catégorie", "Prix", "Quantité", "Code", "Fournisseur", "Image"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -318,7 +340,7 @@ ProviderDAO pddd = new ProviderDAO();
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel9.setText("GERER LES PRODUITS");
+        jLabel9.setText("GERER LES PRODUITS EN RUPTURE DE STOCK");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -362,19 +384,25 @@ ProviderDAO pddd = new ProviderDAO();
                 .addContainerGap())
         );
 
+        imagesArea.setColumns(20);
+        imagesArea.setRows(5);
+        jScrollPane2.setViewportView(imagesArea);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(322, 322, 322)
-                        .addComponent(jLabel9))
+                        .addGap(135, 135, 135)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,7 +411,11 @@ ProviderDAO pddd = new ProviderDAO();
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -433,7 +465,7 @@ ProviderDAO pddd = new ProviderDAO();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 59, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(edit)
@@ -445,7 +477,7 @@ ProviderDAO pddd = new ProviderDAO();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(edit)
                     .addComponent(delete))
@@ -455,59 +487,93 @@ ProviderDAO pddd = new ProviderDAO();
 
     private void add_pActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_pActionPerformed
 
- 
-                                       
-    CategoryDAO cd = new CategoryDAO();
-    ProviderDAO pd = new ProviderDAO();
-    ProductDAO prd = new ProductDAO();
+      CategoryDAO cd = new CategoryDAO();
+        ProviderDAO pd = new ProviderDAO();
+        ProductDAO prd = new ProductDAO();
 
-    String pr_nom = p_nom.getText();
-    String pr_prix_str = p_prix.getText();
-    String pr_qt_str = p_qt.getText();
-    String pr_im = p_i.getText();
-    String pr_code = p_code.getText();
+        String pr_nom = p_nom.getText();
+        String pr_prix_str = p_prix.getText();
+        String pr_qt_str = p_qt.getText();
+        String pr_code = p_code.getText();
 
-    String pr_cat = p_cat.getSelectedItem().toString();
-    String pr_f = p_f.getSelectedItem().toString();
+        String pr_cat = p_cat.getSelectedItem().toString();
+        String pr_f = p_f.getSelectedItem().toString();
 
-    if (pr_nom.isEmpty() || pr_prix_str.isEmpty() || pr_qt_str.isEmpty() || pr_im.isEmpty() || pr_code.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        if (pr_nom.isEmpty() || pr_prix_str.isEmpty() || pr_qt_str.isEmpty() || pr_code.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    try {
-        double pr_prix = Double.parseDouble(pr_prix_str);
-        int pr_qt = Integer.parseInt(pr_qt_str);
+        try {
+            double pr_prix = Double.parseDouble(pr_prix_str);
+            int pr_qt = Integer.parseInt(pr_qt_str);
 
-        
+            int categoryId = cd.getCategoryIdByName(pr_cat);
+            int providerId = pd.getProviderIdByName(pr_f);
 
-        int categoryId = cd.getCategoryIdByName(pr_cat);
-        int providerId = pd.getProviderIdByName(pr_f);
+            Product p = new Product();
+            p.setName(pr_nom);
+            p.setQuantity(pr_qt);
+            p.setPrice(pr_prix);
+            p.setCategoryId(categoryId);
+            p.setProviderId(providerId);
+            p.setCodeBar(pr_code);
 
-        Product p = new Product();
-        p.setName(pr_nom);
-        p.setQuantity(pr_qt);
-        p.setPrice(pr_prix);
-        p.setCategoryId(categoryId);
-        p.setProviderId(providerId);
-        p.setImages(pr_im);
-        p.setCodeBar(pr_code);
+            // Check if at least one image is selected
+            if (imagesArea.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner au moins une image pour le produit.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        prd.addProduct(p);
-        refreshTable();
-        JOptionPane.showMessageDialog(null, "Produit enregistré");
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Prix ou quantité invalide. veuillez entrer une valeur numérique correcte.", "Erreur", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Insértion du produit impossible.", "Erreur", JOptionPane.ERROR_MESSAGE);
-    }
+            // Extract image paths from JTextArea
+            String[] imagePaths = imagesArea.getText().split("\n");
+            List<String> images = new ArrayList<>(Arrays.asList(imagePaths));
 
+            // Validate each image path
+            for (String imagePath : images) {
+                File imageFile = new File(imagePath);
+                if (!imageFile.exists() || !isImageFile(imageFile)) {
+                    JOptionPane.showMessageDialog(null, "Le chemin d'image spécifié n'est pas valide : " + imagePath, "Erreur", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
 
-     
+            p.setImagess(images);
+
+            prd.addProduct(p);
+            refreshTable();
+            JOptionPane.showMessageDialog(null, "Produit enregistré");
+                    imagesArea.setText("");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Prix ou quantité invalide. Veuillez entrer une valeur numérique correcte.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Insertion du produit impossible.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
+    
+
      
 
     }//GEN-LAST:event_add_pActionPerformed
 
+    
+    
+    private boolean isImageFile(File file) {
+        String fileName = file.getName().toLowerCase();
+        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
+    
+    
+   /*  try {
+        BufferedImage image = ImageIO.read(file);
+        return image != null;
+    } catch (IOException e) {
+        return false;
+    }*/
+    
+    }
+    
+    
     private void p_prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_prixActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_p_prixActionPerformed
@@ -526,20 +592,32 @@ ProductDAO pdao = new ProductDAO();
     }
 
     
-    private void updateTable(List<Product> productList) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0); //
+private void updateTable(List<Product> productList) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
 
-        for (Product product : productList) {
-            model.addRow(new Object[]{product.getId(), product.getName(),product.getCategoryName(),product.getPrice(),product.getQuantity(), product.getProviderName()});
+    for (Product product : productList) {
+        List<String> imagePaths = product.getImagess();
+        String firstImagePath = imagePaths.isEmpty() ? "" : imagePaths.get(0);
 
-                    
-        }
+        model.addRow(new Object[]{
+                product.getId(),
+                product.getName(),
+                product.getCategoryName(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.getCodeBar(),
+                product.getProviderName(),
+                firstImagePath
+        });
+    }
+
+    TableColumn imageColumn = jTable1.getColumnModel().getColumn(7); // Assuming image column is at index 6
+    imageColumn.setCellRenderer(new ImageRenderer());
+
+
     
  
-     
- 
-
     }//GEN-LAST:event_r_p_bActionPerformed
 
     private void p_catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_catActionPerformed
@@ -554,15 +632,20 @@ ProductDAO pdao = new ProductDAO();
         // TODO add your handling code here:
     }//GEN-LAST:event_p_qtActionPerformed
 
-    private void p_iActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_iActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_iActionPerformed
-
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
 
 
          int index = jTable1.getSelectedRow();
         if (index != -1) {
+            
+            
+              int response = JOptionPane.showConfirmDialog(produitsout.this,
+                "Voulez vous vraiment vous supprimer ce produit?", " Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+
+        if (response == JOptionPane.YES_OPTION) {
+            
+            
+            
         TableModel model = jTable1.getModel();
         int id = (int) model.getValueAt(index,0);
        
@@ -571,42 +654,24 @@ ProductDAO pdao = new ProductDAO();
         refreshTable();
         JOptionPane.showMessageDialog(this, "Produit supprimé avec succès");
         // refreshTable();
-        }
+        }}
         else {
             JOptionPane.showMessageDialog(this, "veuillez selectionner un produit à supprimer.");
         }
-        
+          
     }//GEN-LAST:event_deleteActionPerformed
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
 
-                                     
     String pr_nom = p_nom.getText();
-String idd = idfield.getText();
-int id;
+    String idd = idfield.getText();
+    int id = Integer.parseInt(idd);
 
-try {
-    id = Integer.parseInt(idd);
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(null, "Invalid ID. Please enter a valid numeric value.", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-
-String pr_prix_str = p_prix.getText();
-String pr_qt_str = p_qt.getText();
-String pr_im = p_i.getText();
-String pr_code = p_code.getText();
-String pr_cat = p_cat.getSelectedItem().toString();
-String pr_f = p_f.getSelectedItem().toString();
-
-if (pr_nom.isEmpty() || pr_prix_str.isEmpty() || pr_qt_str.isEmpty() || pr_im.isEmpty() || pr_code.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-
-try {
-    double pr_prix = Double.parseDouble(pr_prix_str);
-    int pr_qt = Integer.parseInt(pr_qt_str);
+    double pr_prix = Double.parseDouble(p_prix.getText());
+    String pr_cat = p_cat.getSelectedItem().toString();
+    String pr_f = p_f.getSelectedItem().toString();
+    int pr_qt = Integer.parseInt(p_qt.getText());
+    String pr_code = p_code.getText();
 
     CategoryDAO cd = new CategoryDAO();
     ProviderDAO pd = new ProviderDAO();
@@ -621,25 +686,63 @@ try {
     p.setPrice(pr_prix);
     p.setCategoryId(categoryId);
     p.setProviderId(providerId);
-    p.setImages(pr_im);
     p.setCodeBar(pr_code);
 
-    dao.updateProduct(p);
+   
+
+    // Check if at least one image is selected
+    if (!hasSelectedImages()) {
+        // If no new images are selected, don't delete old images
+        
+        dao.update2(p);
+        
+        
+    } else {
+        // Extract image paths from imagesArea
+        List<String> images = getSelectedImages();
+
+        // Validate each image path
+        for (String imagePath : images) {
+            File imageFile = new File(imagePath);
+            if (!imageFile.exists() || !isImageFile(imageFile)) {
+                JOptionPane.showMessageDialog(null, "Le chemin d'image spécifié n'est pas valide : " + imagePath, "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        p.setImagess(images);
+
+        // Ask the user whether to delete old images
+       boolean deleteOldImages = askUserToDeleteOldImages();
+    
+
+    dao.updateProduct(p, deleteOldImages);
+    }
     refreshTable();
     JOptionPane.showMessageDialog(this, "Produit modifié avec succès");
+    imagesArea.setText("");
 
-    // Make sure to handle visibility correctly
     add_p.setVisible(true);
     updatebtn.setVisible(false);
-
     idfield.setVisible(false);
     idlabel.setVisible(false);
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(null, "Qualité ou prix invalide. Veuillez entrer une valeur numérique valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "An error occurred while updating the product.", "Error", JOptionPane.ERROR_MESSAGE);
+    
 }
 
+private boolean askUserToDeleteOldImages() {
+    int choice = JOptionPane.showConfirmDialog(this, "Voulez-vous supprimer les anciennes images ?", "Choix des images", JOptionPane.YES_NO_OPTION);
+    return choice == JOptionPane.YES_OPTION;
+}
+
+private boolean hasSelectedImages() {
+    // Check if at least one image is selected in imagesArea
+    return !imagesArea.getText().trim().isEmpty();
+}
+
+private List<String> getSelectedImages() {
+    // Extract and return the list of selected image paths from imagesArea
+    String[] imagePaths = imagesArea.getText().split("\n");
+    return Arrays.asList(imagePaths);
 
     }//GEN-LAST:event_updatebtnActionPerformed
 
@@ -683,7 +786,7 @@ try {
         // refreshTable();
         }
         else {
-            JOptionPane.showMessageDialog(this, "veuillez selectionner une catégorie à éditer.");
+            JOptionPane.showMessageDialog(this, "veuillez selectionner un produit à modifier.");
         }
 
 
@@ -691,23 +794,84 @@ try {
 
     }//GEN-LAST:event_editActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setMultiSelectionEnabled(true);
+
+    int option = fileChooser.showOpenDialog(this);
+
+    if (option == JFileChooser.APPROVE_OPTION) {
+        File[] selectedFiles = fileChooser.getSelectedFiles();
+
+        for (File file : selectedFiles) {
+            // Append each selected image path to the existing content in JTextArea
+            imagesArea.append(file.getAbsolutePath() + "\n");
+        }
+    }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void p_nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_nomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_nomActionPerformed
+
 
     
     
     private void refreshTable() {
-    ProductDAO dao = new ProductDAO();
-    List<Product> productList = dao.getLowProducts();
 
-    DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Catégorie", "Prix", "Quantité", "Code", "Fournisseur"}, 0);
+    ProductDAO dao = new ProductDAO();
+    List<Product> productList = dao.getOutProducts();
+
+    DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Catégorie", "Prix", "Quantité", "Code", "Fournisseur", "Image"}, 0);
 
     for (Product product : productList) {
-        Object[] rowData = {product.getId(), product.getName(), product.getCategoryName(), product.getPrice(), product.getQuantity(), product.getCodeBar(), product.getProviderName()};
+        Object[] rowData = {
+                product.getId(),
+                product.getName(),
+                product.getCategoryName(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.getCodeBar(),
+                product.getProviderName(),
+                product.getImagess().isEmpty() ? "" : product.getImagess().get(0)  // Display only the first image
+        };
         newTableModel.addRow(rowData);
     }
 
     jTable1.setModel(newTableModel);
+
+    // Assuming the image column is at index 7 (adjust accordingly)
+    TableColumn imageColumn = jTable1.getColumnModel().getColumn(7);
+    imageColumn.setCellRenderer(new ImageRenderer());
+
 }
 
+    
+    
+    
+    
+    public boolean isCellEditable(int row, int column) {
+        return false; // Make the table cells non-editable
+    }
+
+    
+    public Class<?> getColumnClass(int columnIndex) {
+        if (columnIndex == 7) {
+            return ImageIcon.class; // Assuming column 7 is the image column
+        }
+        return getColumnClass(columnIndex);
+    }
+
+  
+    public String getColumnName(int column) {
+              String[] columnNames = {"ID", "Name", "Category", "Price", "Quantity", "Code Bar", "Provider", "Image"};
+
+        return columnNames[column];
+    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -716,6 +880,9 @@ try {
     private javax.swing.JButton edit;
     private java.awt.Label idfield;
     private java.awt.Label idlabel;
+    private javax.swing.JTextArea imagesArea;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -730,11 +897,11 @@ try {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> p_cat;
     private javax.swing.JTextField p_code;
     private javax.swing.JComboBox<String> p_f;
-    private javax.swing.JTextField p_i;
     private javax.swing.JTextField p_nom;
     private javax.swing.JTextField p_prix;
     private javax.swing.JTextField p_qt;

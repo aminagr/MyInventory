@@ -5,6 +5,8 @@
  */
 package dao;
 
+import java.util.List;
+
 /**
  *
  * @author amina
@@ -17,6 +19,8 @@ public class Product {
     private int categoryId;
     private int providerId;
     private String images;
+    private List<String> imagess; // List of image paths
+
     private String codeBar;
     private String categoryName;
     private String providerName;
@@ -42,19 +46,35 @@ public class Product {
        this.providerName = providerName;
         
     } 
-       public Product(int id, String name, int quantity, double price, int categoryId, int providerId,
-                   String images, String codeBar){
-    this.id = id;
+       
+        public Product(int id, String name, int quantity, double price,
+                String codeBar, String categoryName, String providerName, List<String> imagess) {
+     
+        
+         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.categoryId = categoryId;
         this.providerId = providerId;
-        this.images = images;
+       
         this.codeBar = codeBar;
-      
+       this.categoryName = categoryName;
+       this.providerName = providerName;
+        this.imagess = imagess;
+    } 
+       
+     
+       
+       
+       public List<String> getImagess() {
+        return imagess;
     }
 
+    public void setImagess(List<String> imagess) {
+        this.imagess = imagess;
+    }
+       
    public int getId() {
         return id;
     }
