@@ -23,7 +23,7 @@ public class UserDAO
         
         
    private DatabaseHandler databaseHandler;
-   private Session currentSession;
+   private SessionManager currentSession;
 
     public UserDAO() {
         
@@ -46,7 +46,9 @@ public class UserDAO
                             resultSet.getString("username"),
                             resultSet.getString("mdp"),
                             resultSet.getString("role"),
-                            resultSet.getString("email")
+                            resultSet.getString("email"),
+                              resultSet.getString("nom"),
+                        resultSet.getString("prenom")
                     );
                     userList.add(user);
                 }
@@ -116,7 +118,9 @@ public class UserDAO
                             resultSet.getString("username"),
                             resultSet.getString("mdp"),
                             resultSet.getString("role"),
-                            resultSet.getString("email")
+                            resultSet.getString("email"),
+                              resultSet.getString("nom"),
+                        resultSet.getString("prenom")
                     );
                 }
             }
@@ -126,87 +130,41 @@ public class UserDAO
         return null;
     } 
     
-    /*
-    
-   public boolean login(String username, String password) {
-        try {
-            Connection connection = databaseHandler.getConnection();
-            String query = "SELECT * FROM user WHERE username = ? AND mdp = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, username);
-                preparedStatement.setString(2, password);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                if (resultSet.next()) {
-                    User currentUser = new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("username"),
-                            resultSet.getString("mdp"),
-                            resultSet.getString("role"),
-                            resultSet.getString("email")
-                    );
-                    currentSession = new Session(currentUser);
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-*/
+   
     public void logout() {
-        // Clear the current session (logout)
-        currentSession = null;
-    } 
+           try {
+            // Get the currently logged-in user
+            User currentUser = SessionManager.getInstance().getUser();
 
-    
-    
-    
-    
-    
-    
-    
-       public boolean login(String username, String password) {
-        try {
-            Connection connection = databaseHandler.getConnection();
-            String query = "SELECT * FROM user WHERE username = ? AND mdp = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, username);
-                preparedStatement.setString(2, password);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                if (resultSet.next()) {
-                    User currentUser = new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("username"),
-                            resultSet.getString("mdp"),
-                            resultSet.getString("role"),
-                            resultSet.getString("email")
-                    );
-                    currentSession = new Session(currentUser);
-                    
-                            
-
-                    return true;
-                }
+            // If a user is logged in
+            if (currentUser != null) {
+                // Update the "remember_me" value to false in the database
+                updateRememberMeValue(currentUser.getUsername(), false);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
+            // Clear the session (logout)
+            SessionManager.getInstance().setUser(null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+    } 
+    }
     
     
     
     
     
     
-    
-    /*
-    public boolean login(String username, String password, boolean rememberMe) {
+   
+public boolean login(String username, String password, boolean rememberMe) {
     try {
         Connection connection = databaseHandler.getConnection();
-        String query = "SELECT * FROM user WHERE username = ? AND mdp = ?";
+        //String query = "SELECT * FROM user WHERE username = ? AND mdp = ?";
+        
+        
+        String query = "SELECT id, username, mdp, role, email, nom, prenom FROM user WHERE username = ? AND mdp = ?";
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -217,15 +175,16 @@ public class UserDAO
                         resultSet.getString("username"),
                         resultSet.getString("mdp"),
                         resultSet.getString("role"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom")
                 );
 
-                
-                updateUserRememberMe(currentUser.getUsername(), rememberMe);
+                if (rememberMe) {
+                    updateRememberMeValue(username, true);
+                }
 
-                currentSession = new Session(currentUser);
-                
-
+                SessionManager.getInstance().setUser(currentUser); // Set the user in the SessionManager
                 return true;
             }
         }
@@ -235,23 +194,9 @@ public class UserDAO
     return false;
 }
 
-    public void logout(){
-    // Update remember_me to false in the database
-    //if (currentSession != null) {
-      //  System.out.println("Logging out user: " + currentSession.getUser().getUsername());
-        //(currentSession.getUser().getUsername(), false);
-        
-    
-    //}
+ 
 
-  
-    
-
-    // Clear the current session (logout)
-    currentSession = null;
-                    }
-
-public void updateUserRememberMe(String username, boolean rememberMe) {
+    public void updateRememberMeValue(String username, boolean rememberMe) {
     try {
         Connection connection = databaseHandler.getConnection();
         String query = "UPDATE user SET remember_me = ? WHERE username = ?";
@@ -263,12 +208,14 @@ public void updateUserRememberMe(String username, boolean rememberMe) {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-}
-
-
+    
+    }
     
     
-    */
+    
+    
+    
+    
     
 
     public boolean isLoggedIn() {
@@ -279,7 +226,37 @@ public void updateUserRememberMe(String username, boolean rememberMe) {
         return currentSession != null ? currentSession.getUser() : null;
     }
 
+    public User getRememberedUser() {
+        try {
+            Connection connection = databaseHandler.getConnection();
+            String query = "SELECT * FROM user WHERE remember_me = true";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    return new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("username"),
+                            resultSet.getString("mdp"),
+                            resultSet.getString("role"),
+                            resultSet.getString("email"),
+                              resultSet.getString("nom"),
+                        resultSet.getString("prenom")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
+    
+    
+  public boolean isUserLoggedIn() {
+        // Check if the SessionManager has a user
+        return SessionManager.getInstance().getUser() != null;
+    }
+}
 
     
     
@@ -289,4 +266,4 @@ public void updateUserRememberMe(String username, boolean rememberMe) {
         
         
     
-}
+

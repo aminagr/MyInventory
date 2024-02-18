@@ -6,6 +6,8 @@
 package warehouse;
 
 import dao.Session;
+import dao.SessionManager;
+import dao.User;
 import dao.UserDAO;
 import java.awt.Color;
 import java.util.prefs.Preferences;
@@ -318,23 +320,21 @@ public class login extends javax.swing.JFrame {
 
         UserDAO userDAO = new UserDAO();
 
-        String enteredUsername = username.getText();
-        String enteredPassword = new String(mdp.getPassword());
-        Boolean rememberme = remember.isSelected();
-        
-       // boolean loginSuccessful = userDAO.login(enteredUsername, enteredPassword,rememberme);
-       boolean loginSuccessful = userDAO.login(enteredUsername, enteredPassword);
-        //userDAO.updateUserRememberMe(enteredUsername,rememberme);
-        if (loginSuccessful) {
-            // Open the Home frame upon successful login
-       
+    String enteredUsername = username.getText();
+    String enteredPassword = new String(mdp.getPassword());
+    Boolean rememberme = remember.isSelected();
 
-            new Home().setVisible(true);
-                dispose();
-        } else {
-            // Display an error message for unsuccessful login
-            JOptionPane.showMessageDialog(login.this, "Nom d'utilisateur ou mot de passe invalide.");
-        }
+    boolean loginSuccessful = userDAO.login(enteredUsername, enteredPassword, rememberme);
+
+    if (loginSuccessful) {
+        // Open the Home frame upon successful login and pass the user information
+        User currentUser = SessionManager.getInstance().getUser();
+        new Home(currentUser).setVisible(true); // Pass the user to Home constructor
+        dispose();
+    } else {
+        // Display an error message for unsuccessful login
+        JOptionPane.showMessageDialog(login.this, "Nom d'utilisateur ou mot de passe invalide.");
+    }
     }//GEN-LAST:event_connexionActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed

@@ -6,8 +6,11 @@
 package warehouse;
 
 import dao.Session;
+import dao.SessionManager;
+import dao.User;
 import dao.UserDAO;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -19,14 +22,21 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     JpanelLoader jpload = new JpanelLoader();
-    public Home() {
+    private User currentUser;
+    public Home(User user) {
+        
+        
+        this.currentUser = user;
         //this.setExtendedState(Home.MAXIMIZED_BOTH);
+        
+        
+        
         initComponents();
           Accueil2 a = new Accueil2();
           
         jpload.jPanelLoader(panel_reload, a);
     
-    
+    admin.setText(currentUser.getUsername());
     
   
     
@@ -543,30 +553,22 @@ public class Home extends javax.swing.JFrame {
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
 
+      int response = JOptionPane.showConfirmDialog(Home.this,
+            "Voulez-vous vraiment vous déconnecter?", "Confirmation de déconnexion", JOptionPane.YES_NO_OPTION);
+
+    if (response == JOptionPane.YES_OPTION) {
         UserDAO userDAO = new UserDAO();
-
-        
-        
-         int response = JOptionPane.showConfirmDialog(Home.this,
-                "Voulez vous vraiment vous déconnecter?", " Confirmation de déconnexion", JOptionPane.YES_NO_OPTION);
-
-        if (response == JOptionPane.YES_OPTION) {
-            
-        
         userDAO.logout();
 
-              
-                JOptionPane.showMessageDialog(Home.this, "Vous etes déconnecté.");
+        JOptionPane.showMessageDialog(Home.this, "Vous êtes déconnecté.");
 
-               
-              
-                new login().setVisible(true);
-              
-                dispose();
-        }
+        // Open the login frame upon successful logout
+        new login().setVisible(true);
+        
+        
+        dispose();
 
-
-
+                }
     }//GEN-LAST:event_logoutActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -623,7 +625,7 @@ statistiques a = new statistiques();
    dispose();    }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-compte a = new compte();
+compte a = new compte(currentUser);
  jpload.jPanelLoader(panel_reload, a);      }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -656,7 +658,9 @@ compte a = new compte();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                UserDAO userDAO = new UserDAO();
+    User user = userDAO.getCurrentUser(); 
+                new Home(user).setVisible(true);
                 
             }
         });
