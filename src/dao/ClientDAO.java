@@ -24,7 +24,7 @@ public class ClientDAO {
 
             preparedStatement.executeUpdate();
 
-            // Retrieve the generated key (client ID)
+            
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 client.setId(generatedKeys.getInt(1));

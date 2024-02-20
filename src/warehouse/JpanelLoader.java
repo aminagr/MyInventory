@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package warehouse;
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author coolsasisndu
+ * @author amina
  */
 public class JpanelLoader {
    

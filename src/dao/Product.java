@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dao;
 
 import java.util.List;
@@ -19,7 +15,7 @@ public class Product {
     private int categoryId;
     private int providerId;
     private String images;
-    private List<String> imagess; // List of image paths
+    private List<String> imagess; 
 
     private String codeBar;
     private String categoryName;

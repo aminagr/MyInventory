@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dao;
 
 /**
@@ -32,11 +28,6 @@ public class CategoryDAO {
 
             preparedStatement.executeUpdate();
 
-            // Retrieve the generated key (category ID)
-           /* ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                category.setId(generatedKeys.getInt(1));
-            } */
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package warehouse;
 
-import dao.Session;
+
 import dao.SessionManager;
 import dao.User;
 import dao.UserDAO;
@@ -18,9 +14,7 @@ import javax.swing.SwingUtilities;
  */
 public class Home extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Home
-     */
+   
     JpanelLoader jpload = new JpanelLoader();
     private User currentUser;
     public Home(User user) {
@@ -39,12 +33,6 @@ public class Home extends javax.swing.JFrame {
     admin.setText(currentUser.getUsername());
     
   
-    
-    
-    
-    
-    
-    
     
     }
 
@@ -562,7 +550,7 @@ public class Home extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(Home.this, "Vous êtes déconnecté.");
 
-        // Open the login frame upon successful logout
+        
         new login().setVisible(true);
         
         
