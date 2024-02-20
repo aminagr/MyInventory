@@ -1,4 +1,4 @@
-MyInventory is a Java Swing application designed for inventory managers, providing comprehensive tools for efficiently managing products, categories, suppliers, clients, and orders. This application aims to streamline inventory management processes, offering a user-friendly interface for enhanced productivity.
+MyInventory is a Java Swing application designed for inventory managers to manage products, categories, suppliers, clients, and orders. This application aims to streamline inventory management processes, offering a user-friendly interface for enhanced productivity.
 This app will be complemented by an e-commerce website to allow clients to browse products, place orders, and make purchases online.
 
 
