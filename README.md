@@ -5,4 +5,5 @@ This app will be complemented by an e-commerce website to allow clients to brows
 
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/35f3bab3-a60f-42db-a984-ac8a835fe249)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/2e4e15ee-e7b3-4182-bd6c-c3d16249730e)
+![image](https://github.com/aminagr/Warehouse_3/assets/36279270/2b04622a-126c-4c53-b173-6200a3aeaeba)
 
