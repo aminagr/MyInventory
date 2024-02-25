@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author amina
+ * @author amina 
  */
 public class ImageRenderer extends DefaultTableCellRenderer {
     
@@ -20,7 +20,7 @@ public class ImageRenderer extends DefaultTableCellRenderer {
         JLabel label = new JLabel();
         if (value != null) {
             ImageIcon imageIcon = new ImageIcon((String) value);
-            label.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            label.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
         } else {
             label.setIcon(null);
         }

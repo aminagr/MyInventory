@@ -1,6 +1,5 @@
 
 package warehouse;
-
 import dao.User;
 import dao.UserDAO;
 import java.awt.event.WindowAdapter;
@@ -11,15 +10,18 @@ import javax.swing.SwingUtilities;
  *
  * @author amina
  */
-public class Warehouse {
+public class Main {
+    
+    
 
-    public static void main(String[] args) {
-       /* UserDAO userDAO = new UserDAO();
+public static void main(String[] args) {
+    
+       UserDAO userDAO = new UserDAO();
 
         
         User rememberedUser = userDAO.getRememberedUser();
 
-        // Check if the user is logged in or has checked "Remember Me"
+      
         if (userDAO.isUserLoggedIn() || rememberedUser != null) {
             // If the user is logged in or remembered, open the Home frame
             SwingUtilities.invokeLater(new Runnable() {
@@ -28,24 +30,25 @@ public class Warehouse {
                 }
             });
         } else {
-            // If neither logged in nor remembered, open the Login frame
+           
+            User user = new User();
+user.setId(2);
+user.setUsername("Mina");
+user.setPassword("Mina");
+        user.setNom("Mina");
+        user.setPrenom("G");
+        user.setEmail("mina@gmail.com");
+        
+            
+            
+            
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    new login().setVisible(true);
+                  //  new login().setVisible(true);
+                   new Home(user).setVisible(true);
                 }
             });
         }
-    */
 
-
-        
-        new login().setVisible(true);
-
-       
-    }
-
-
-              
-           
-        
-
+}
+}

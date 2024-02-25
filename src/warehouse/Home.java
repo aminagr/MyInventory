@@ -31,7 +31,7 @@ public class Home extends javax.swing.JFrame {
         jpload.jPanelLoader(panel_reload, a);
     
     admin.setText(currentUser.getUsername());
-    
+
   
     
     }
@@ -175,7 +175,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         logout.setBackground(new java.awt.Color(255, 255, 255));
-        logout.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        logout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logout.setForeground(new java.awt.Color(0, 102, 204));
         logout.setText("Déconnexion");
         logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
