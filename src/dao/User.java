@@ -11,9 +11,10 @@ public class User {
     private String password;
     private String role;
     private String email;
-private String nom;
-    private String prenom;
-
+    private String nom;
+   private String prenom;
+    private String address;
+    private String phoneNumber;
 
     
     public User()
@@ -30,6 +31,19 @@ private String nom;
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;
+    }
+    
+    
+    public User(int id, String username, String password, String role, String email, String nom, String prenom, String address, String phoneNumber) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     
@@ -88,4 +102,23 @@ private String nom;
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+    
+    
+     public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    
+    
 }

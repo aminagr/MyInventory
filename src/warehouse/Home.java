@@ -5,6 +5,9 @@ package warehouse;
 import dao.SessionManager;
 import dao.User;
 import dao.UserDAO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -13,7 +16,7 @@ import javax.swing.SwingUtilities;
  * @author amina
  */
 public class Home extends javax.swing.JFrame {
-
+   private int mouseX, mouseY;
    
     JpanelLoader jpload = new JpanelLoader();
     private User currentUser;
@@ -31,6 +34,29 @@ public class Home extends javax.swing.JFrame {
         jpload.jPanelLoader(panel_reload, a);
     
     admin.setText(currentUser.getUsername());
+
+    
+    
+    
+    setLocationRelativeTo(null);
+      
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int newX = getLocation().x + e.getX() - mouseX;
+                int newY = getLocation().y + e.getY() - mouseY;
+                setLocation(newX, newY);
+            }
+        });
+
+        
+        setVisible(true);
     
   
     
@@ -175,7 +201,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         logout.setBackground(new java.awt.Color(255, 255, 255));
-        logout.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        logout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logout.setForeground(new java.awt.Color(0, 102, 204));
         logout.setText("Déconnexion");
         logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
