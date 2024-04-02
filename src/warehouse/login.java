@@ -5,6 +5,9 @@ import dao.SessionManager;
 import dao.User;
 import dao.UserDAO;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.prefs.Preferences;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -16,20 +19,36 @@ import javax.swing.border.Border;
  */
 public class login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
-
+   private int mouseX, mouseY;
+   
     public login() {
         initComponents();
      see.setVisible(false);
                
+
+        setLocationRelativeTo(null);
+      
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int newX = getLocation().x + e.getX() - mouseX;
+                int newY = getLocation().y + e.getY() - mouseY;
+                setLocation(newX, newY);
+            }
+        });
+
         
-        
-       
+        setVisible(true);
     }
-    
-    
+     
+     
+     
     
     
     

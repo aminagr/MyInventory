@@ -5,6 +5,9 @@ package warehouse;
 import dao.SessionManager;
 import dao.User;
 import dao.UserDAO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -13,7 +16,7 @@ import javax.swing.SwingUtilities;
  * @author amina
  */
 public class Home extends javax.swing.JFrame {
-
+   private int mouseX, mouseY;
    
     JpanelLoader jpload = new JpanelLoader();
     private User currentUser;
@@ -32,6 +35,29 @@ public class Home extends javax.swing.JFrame {
     
     admin.setText(currentUser.getUsername());
 
+    
+    
+    
+    setLocationRelativeTo(null);
+      
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int newX = getLocation().x + e.getX() - mouseX;
+                int newY = getLocation().y + e.getY() - mouseY;
+                setLocation(newX, newY);
+            }
+        });
+
+        
+        setVisible(true);
+    
   
     
     }

@@ -882,7 +882,7 @@ private List<String> getSelectedImages() {
     }//GEN-LAST:event_editActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+imagesArea.setText("");
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setMultiSelectionEnabled(true);
 

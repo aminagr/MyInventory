@@ -26,28 +26,24 @@ public class UserDAO
         this.databaseHandler = new DatabaseHandler();
         
     }
-
-    
-
-    public List<User> listAllUsers() {
+public List<User> listAllUsers() {
         List<User> userList = new ArrayList<>();
-        try {
-             Connection connection = databaseHandler.getConnection();
-            String query = "SELECT * FROM user";
-            try (Statement statement = connection.createStatement();
-                 ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next()) {
-                    User user = new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("username"),
-                            resultSet.getString("mdp"),
-                            resultSet.getString("role"),
-                            resultSet.getString("email"),
-                              resultSet.getString("nom"),
-                        resultSet.getString("prenom")
-                    );
-                    userList.add(user);
-                }
+        try (Connection connection = databaseHandler.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM user")) {
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("mdp"),
+                        resultSet.getString("role"),
+                        resultSet.getString("email"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getString("adresse"),
+                        resultSet.getString("numero")
+                );
+                userList.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,76 +51,85 @@ public class UserDAO
         return userList;
     }
 
-    public void createUser(User user) {
-        try {
-             Connection connection = databaseHandler.getConnection();
-            String query = "INSERT INTO user (username, mdp, role, email) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, user.getUsername());
-                preparedStatement.setString(2, user.getPassword());
-                preparedStatement.setString(3, user.getRole());
-                preparedStatement.setString(4, user.getEmail());
-                preparedStatement.executeUpdate();
-            }
+
+     public void createUser(User user) {
+        try (Connection connection = databaseHandler.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (username, mdp, role, email, nom, prenom, adresse, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getRole());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getNom());
+            preparedStatement.setString(6, user.getPrenom());
+            preparedStatement.setString(7, user.getAddress());
+            preparedStatement.setString(8, user.getPhoneNumber());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void updateUser(User user) {
-        try {
-             Connection connection = databaseHandler.getConnection();
-            String query = "UPDATE user SET username = ?, mdp = ?, role = ?, email = ? WHERE id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, user.getUsername());
-                preparedStatement.setString(2, user.getPassword());
-                preparedStatement.setString(3, user.getRole());
-                preparedStatement.setString(4, user.getEmail());
-                preparedStatement.setInt(5, user.getId());
-                preparedStatement.executeUpdate();
-            }
+        try (Connection connection = databaseHandler.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE user SET username = ?, mdp = ?, role = ?, email = ?, nom = ?, prenom = ?, adresse = ?, numero = ? WHERE id = ?")) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getRole());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getNom());
+            preparedStatement.setString(6, user.getPrenom());
+            preparedStatement.setString(7, user.getAddress());
+            preparedStatement.setString(8, user.getPhoneNumber());
+            preparedStatement.setInt(9, user.getId());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void deleteUser(int userId) {
-        try {
-             Connection connection = databaseHandler.getConnection();
-            String query = "DELETE FROM user WHERE id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setInt(1, userId);
-                preparedStatement.executeUpdate();
-            }
+        try (Connection connection = databaseHandler.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE id = ?")) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public User searchUser(int userId) {
-        try {
-             Connection connection = databaseHandler.getConnection();
-            String query = "SELECT * FROM user WHERE id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setInt(1, userId);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                if (resultSet.next()) {
-                    return new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("username"),
-                            resultSet.getString("mdp"),
-                            resultSet.getString("role"),
-                            resultSet.getString("email"),
-                              resultSet.getString("nom"),
-                        resultSet.getString("prenom")
-                    );
-                }
+public List<User> searchUser(String searchQuery) {
+    List<User> userList = new ArrayList<>();
+    try (Connection connection = databaseHandler.getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username LIKE ? OR email LIKE ? OR nom LIKE ? OR prenom LIKE ? OR adresse LIKE ? OR numero LIKE ?")) {
+        String queryParam = "%" + searchQuery + "%";
+        preparedStatement.setString(1, queryParam);
+        preparedStatement.setString(2, queryParam);
+        preparedStatement.setString(3, queryParam);
+        preparedStatement.setString(4, queryParam);
+        preparedStatement.setString(5, queryParam);
+        preparedStatement.setString(6, queryParam);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("mdp"),
+                        resultSet.getString("role"),
+                        resultSet.getString("email"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getString("adresse"),
+                        resultSet.getString("numero")
+                );
+                userList.add(user);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return null;
-    } 
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return userList;
+}
+
     
    
     public void logout() {
@@ -159,7 +164,7 @@ public boolean login(String username, String password, boolean rememberMe) {
         //String query = "SELECT * FROM user WHERE username = ? AND mdp = ?";
         
         
-        String query = "SELECT id, username, mdp, role, email, nom, prenom FROM user WHERE username = ? AND mdp = ?";
+        String query = "SELECT id, username, mdp, role, email, nom, prenom, adresse, numero FROM user WHERE username = ? AND mdp = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
@@ -173,7 +178,9 @@ public boolean login(String username, String password, boolean rememberMe) {
                         resultSet.getString("role"),
                         resultSet.getString("email"),
                         resultSet.getString("nom"),
-                        resultSet.getString("prenom")
+                        resultSet.getString("prenom"),
+                         resultSet.getString("adresse"),
+                            resultSet.getString("numero")
                 );
 
                 if (rememberMe) {
@@ -236,7 +243,9 @@ public boolean login(String username, String password, boolean rememberMe) {
                             resultSet.getString("role"),
                             resultSet.getString("email"),
                               resultSet.getString("nom"),
-                        resultSet.getString("prenom")
+                        resultSet.getString("prenom"),
+                             resultSet.getString("adresse"),
+                            resultSet.getString("numero")
                     );
                 }
             }

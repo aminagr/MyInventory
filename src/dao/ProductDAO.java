@@ -128,7 +128,12 @@ private List<String> getImagePathsForProduct(Connection connection, int productI
 }
 
     
-    
+
+
+
+
+
+
 public void updateProduct(Product product, boolean deleteOldImages) {
     String updateProductQuery = "UPDATE produits SET nom = ?, qt = ?, prix = ?, categorie = ?, " +
                                 "fournisseur = ?, code = ? WHERE id = ?";
@@ -178,6 +183,26 @@ public void updateProduct(Product product, boolean deleteOldImages) {
     }
 }
 
+
+
+
+
+
+
+// Helper method to get the current quantity of a product
+private int getProductQuantity(int productId) throws SQLException {
+    String query = "SELECT qt FROM produits WHERE id = ?";
+    try (Connection connection = databaseHandler.getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setInt(1, productId);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt("qt");
+            }
+        }
+    }
+    return 0; // Default value if the product is not found
+}
 
 
 
