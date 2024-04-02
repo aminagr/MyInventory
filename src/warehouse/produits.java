@@ -7,6 +7,7 @@ import dao.ProductDAO;
 import dao.Provider;
 import dao.ProviderDAO;
 import java.awt.image.BufferedImage;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -905,10 +906,22 @@ imagesArea.setText("");
     }//GEN-LAST:event_p_nomActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_printActionPerformed
+ print();    }//GEN-LAST:event_printActionPerformed
 
+public void print() {
+        try {
+            boolean complete = jTable1.print();
+            if (complete) {
+                JOptionPane.showMessageDialog(this, "Printing Successful", "Print Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Printing Cancelled", "Print Result", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (PrinterException pe) {
+            JOptionPane.showMessageDialog(this, "Printing Failed: " + pe.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
+  
     
     
     private void refreshTable() {
