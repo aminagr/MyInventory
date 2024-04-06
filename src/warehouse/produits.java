@@ -87,6 +87,7 @@ ProviderDAO pddd = new ProviderDAO();
                     product.getName(),
                     product.getCategoryName(),
                     product.getPrice(),
+                    product.getPricev(),
                     product.getQuantity(),
                     product.getCodeBar(),
                     product.getProviderName(),
@@ -96,7 +97,7 @@ ProviderDAO pddd = new ProviderDAO();
             dt.addRow(rowData);
         }
 
-               TableColumn imageColumn = jTable1.getColumnModel().getColumn(7);
+               TableColumn imageColumn = jTable1.getColumnModel().getColumn(8);
             imageColumn.setCellRenderer(new ImageRenderer());
 
    
@@ -126,7 +127,7 @@ ProviderDAO pddd = new ProviderDAO();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         p_nom = new javax.swing.JTextField();
-        p_prix = new javax.swing.JTextField();
+        p_prixv = new javax.swing.JTextField();
         p_qt = new javax.swing.JTextField();
         add_p = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -143,6 +144,9 @@ ProviderDAO pddd = new ProviderDAO();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        p_prixa = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -171,7 +175,7 @@ ProviderDAO pddd = new ProviderDAO();
         jLabel2.setText("Catégorie");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Prix");
+        jLabel3.setText("Prix d'achat");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Quantité");
@@ -184,11 +188,11 @@ ProviderDAO pddd = new ProviderDAO();
             }
         });
 
-        p_prix.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        p_prix.setBorder(null);
-        p_prix.addActionListener(new java.awt.event.ActionListener() {
+        p_prixv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        p_prixv.setBorder(null);
+        p_prixv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p_prixActionPerformed(evt);
+                p_prixvActionPerformed(evt);
             }
         });
 
@@ -271,6 +275,19 @@ ProviderDAO pddd = new ProviderDAO();
 
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Prix de vente");
+
+        p_prixa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        p_prixa.setBorder(null);
+        p_prixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                p_prixaActionPerformed(evt);
+            }
+        });
+
+        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -279,7 +296,7 @@ ProviderDAO pddd = new ProviderDAO();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -291,7 +308,7 @@ ProviderDAO pddd = new ProviderDAO();
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1)
-                                    .addComponent(p_f, 0, 132, Short.MAX_VALUE)))
+                                    .addComponent(p_f, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(33, 33, 33)
@@ -301,21 +318,21 @@ ProviderDAO pddd = new ProviderDAO();
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator3)
-                                    .addComponent(p_prix)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jSeparator3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
+                                .addComponent(p_code, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator5)
-                                    .addComponent(p_code)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator4)
-                                    .addComponent(p_qt)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(p_qt, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,7 +343,20 @@ ProviderDAO pddd = new ProviderDAO();
                         .addComponent(idlabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(idfield, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(p_prixv, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(120, 120, 120)
+                    .addComponent(p_prixa)
+                    .addGap(48, 48, 48)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,54 +374,68 @@ ProviderDAO pddd = new ProviderDAO();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(p_cat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(p_prix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(p_qt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(p_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(p_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(p_prixv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(add_p)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updatebtn)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(p_qt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(p_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel8))
+                        .addGap(35, 35, 35)
+                        .addComponent(add_p)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updatebtn)))
                 .addGap(18, 18, 18))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(149, 149, 149)
+                    .addComponent(p_prixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(396, Short.MAX_VALUE)))
         );
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nom", "Catégorie", "Prix (DA)", "Quantité", "Code", "Fournisseur", "Image"
+                "ID", "Nom", "Catégorie", "Prix d'achat", "Prix de vente", "Quantité", "Code", "Fournisseur", "Image"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(200);
         }
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -508,7 +552,7 @@ ProviderDAO pddd = new ProviderDAO();
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -579,7 +623,8 @@ ProviderDAO pddd = new ProviderDAO();
         ProductDAO prd = new ProductDAO();
 
         String pr_nom = p_nom.getText();
-        String pr_prix_str = p_prix.getText();
+        String pr_prix_str = p_prixa.getText();
+        String pr_prix_str2 = p_prixv.getText();
         String pr_qt_str = p_qt.getText();
         String pr_code = p_code.getText();
 
@@ -592,7 +637,8 @@ ProviderDAO pddd = new ProviderDAO();
         }
 
         try {
-            double pr_prix = Double.parseDouble(pr_prix_str);
+            double pr_prixa = Double.parseDouble(pr_prix_str);
+             double pr_prixv = Double.parseDouble(pr_prix_str2);
             int pr_qt = Integer.parseInt(pr_qt_str);
 
             int categoryId = cd.getCategoryIdByName(pr_cat);
@@ -601,7 +647,8 @@ ProviderDAO pddd = new ProviderDAO();
             Product p = new Product();
             p.setName(pr_nom);
             p.setQuantity(pr_qt);
-            p.setPrice(pr_prix);
+            p.setPrice(pr_prixa);
+            p.setPricev(pr_prixv);
             p.setCategoryId(categoryId);
             p.setProviderId(providerId);
             p.setCodeBar(pr_code);
@@ -661,9 +708,9 @@ ProviderDAO pddd = new ProviderDAO();
     }
     
     
-    private void p_prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_prixActionPerformed
+    private void p_prixvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_prixvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_p_prixActionPerformed
+    }//GEN-LAST:event_p_prixvActionPerformed
 
     private void recherche_pActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recherche_pActionPerformed
         // TODO add your handling code here:
@@ -692,6 +739,7 @@ private void updateTable(List<Product> productList) {
                 product.getName(),
                 product.getCategoryName(),
                 product.getPrice(),
+                 product.getPricev(),
                 product.getQuantity(),
                 product.getCodeBar(),
                 product.getProviderName(),
@@ -754,7 +802,8 @@ private void updateTable(List<Product> productList) {
     String idd = idfield.getText();
     int id = Integer.parseInt(idd);
 
-    double pr_prix = Double.parseDouble(p_prix.getText());
+    double pr_prixa = Double.parseDouble(p_prixa.getText());
+      double pr_prixv = Double.parseDouble(p_prixv.getText());
     String pr_cat = p_cat.getSelectedItem().toString();
     String pr_f = p_f.getSelectedItem().toString();
     int pr_qt = Integer.parseInt(p_qt.getText());
@@ -770,7 +819,8 @@ private void updateTable(List<Product> productList) {
     p.setId(id);
     p.setName(pr_nom);
     p.setQuantity(pr_qt);
-    p.setPrice(pr_prix);
+    p.setPrice(pr_prixa);
+    p.setPricev(pr_prixv);
     p.setCategoryId(categoryId);
     p.setProviderId(providerId);
     p.setCodeBar(pr_code);
@@ -844,18 +894,21 @@ private List<String> getSelectedImages() {
         String nom = (String) model.getValueAt(index,1);
         String categorie = (String) model.getValueAt(index,2);
         //String prix = (String) model.getValueAt(index,3);
-        Double prix = (Double) model.getValueAt(index,3);
-         int qt =  (int) model.getValueAt(index,4);
-           String code = (String) model.getValueAt(index,5);
-           String fournisseur = (String) model.getValueAt(index,6);
+        Double prixa = (Double) model.getValueAt(index,3);
+        Double prixv = (Double) model.getValueAt(index,4);
+         int qt =  (int) model.getValueAt(index,5);
+           String code = (String) model.getValueAt(index,6);
+           String fournisseur = (String) model.getValueAt(index,7);
            
            
        String qtt = Integer.toString(qt);  
-       String prixx = Double.toString(prix);
+       String prixxa = Double.toString(prixa);
+       String prixxv = Double.toString(prixv);
        String idd = Integer.toString(id);
        p_nom.setText(nom); 
         p_cat.setSelectedItem(categorie);
-        p_prix.setText(prixx);
+        p_prixa.setText(prixxa);
+        p_prixv.setText(prixxv);
         p_qt.setText(qtt);
         p_code.setText(code);
         p_f.setSelectedItem(fournisseur);
@@ -908,6 +961,10 @@ imagesArea.setText("");
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
  print();    }//GEN-LAST:event_printActionPerformed
 
+    private void p_prixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_prixaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_prixaActionPerformed
+
 public void print() {
         try {
             boolean complete = jTable1.print();
@@ -929,7 +986,7 @@ public void print() {
     ProductDAO dao = new ProductDAO();
     List<Product> productList = dao.getAllProducts();
 
-    DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Catégorie", "Prix(DA)", "Quantité", "Code", "Fournisseur", "Image"}, 0);
+    DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Catégorie", "Prix achat", "Prix vente", "Quantité", "Code", "Fournisseur", "Image"}, 0);
 
     for (Product product : productList) {
         Object[] rowData = {
@@ -937,6 +994,7 @@ public void print() {
                 product.getName(),
                 product.getCategoryName(),
                 product.getPrice(),
+                product.getPricev(),
                 product.getQuantity(),
                 product.getCodeBar(),
                 product.getProviderName(),
@@ -948,7 +1006,7 @@ public void print() {
     jTable1.setModel(newTableModel);
 jTable1.setRowHeight(128);
     // Assuming the image column is at index 7 (adjust accordingly)
-    TableColumn imageColumn = jTable1.getColumnModel().getColumn(7);
+    TableColumn imageColumn = jTable1.getColumnModel().getColumn(8);
     imageColumn.setCellRenderer(new ImageRenderer());
 
 }
@@ -963,7 +1021,7 @@ jTable1.setRowHeight(128);
 
     
     public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 7) {
+        if (columnIndex == 8) {
             return ImageIcon.class; // Assuming column 7 is the image column
         }
         return getColumnClass(columnIndex);
@@ -971,7 +1029,7 @@ jTable1.setRowHeight(128);
 
   
     public String getColumnName(int column) {
-              String[] columnNames = {"ID", "Name", "Category", "Price", "Quantity", "Code Bar", "Provider", "Image"};
+              String[] columnNames = {"ID", "Name", "Category", "Price", "Price 2", "Quantity", "Code Bar", "Provider", "Image"};
 
         return columnNames[column];
     }
@@ -992,6 +1050,7 @@ jTable1.setRowHeight(128);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1006,13 +1065,15 @@ jTable1.setRowHeight(128);
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelajouter;
     private javax.swing.JComboBox<String> p_cat;
     private javax.swing.JTextField p_code;
     private javax.swing.JComboBox<String> p_f;
     private javax.swing.JTextField p_nom;
-    private javax.swing.JTextField p_prix;
+    private javax.swing.JTextField p_prixa;
+    private javax.swing.JTextField p_prixv;
     private javax.swing.JTextField p_qt;
     private javax.swing.JButton print;
     private javax.swing.JButton r_p_b;

@@ -24,11 +24,11 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author amina
  */
-public class commandes_acceptees extends javax.swing.JPanel {
+public class ventes extends javax.swing.JPanel {
 
    
     
-    public commandes_acceptees() {
+    public ventes() {
         initComponents();
         tb_load();
     }
@@ -54,20 +54,20 @@ public class commandes_acceptees extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "", ""
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel2.setText("COMMANDES ACCEPTEES");
+        jLabel2.setText("VENTES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,14 +140,14 @@ public class commandes_acceptees extends javax.swing.JPanel {
         };
 
         model.setColumnIdentifiers(new Object[]{
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "Restaurer", "Vendu"
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
         });
 
         jTable1.setModel(model);
 
         // Add data to the table
         OrdersDAO ordersDAO = new OrdersDAO();
-        List<Orders> ordersList = ordersDAO.getAcceptedOrders();
+        List<Orders> ordersList = ordersDAO.getSoldOrders();
 
         for (Orders order : ordersList) {
             model.addRow(new Object[]{
@@ -157,124 +157,18 @@ public class commandes_acceptees extends javax.swing.JPanel {
                     order.getClientName(),
                     order.getQuantity(),
                     order.getAmount(),
-                    order.getOrderDate(),
-                    "Restaurer",
-                    "Vendu"
+                    order.getOrderDate()
+                   
             });
         }
 
-        // Add button column renderer and editor for "Accepter"
-        jTable1.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(7).setCellEditor(new Restaurer(new JTextField(), jTable1));
-
-        // Add button column renderer and editor for "Refuser"
-        jTable1.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(8).setCellEditor(new Sold(new JTextField(),jTable1));
-
+      
     } catch (Exception e) {
         System.out.println(e);
     }
 }
 
 
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-   class Restaurer extends DefaultCellEditor {
-    protected JButton button;
-
-    private String label;
-    private JTable table;
-
-    public Restaurer(JTextField textField, JTable table) {
-        super(textField);
-        this.table = table;
-        button = new JButton();
-        button.setOpaque(true);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Set hand cursor
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int row = table.convertRowIndexToModel(table.getEditingRow());
-                Object id = table.getModel().getValueAt(row, 0); // Assuming ID is in the first column
-                // Call your DAO method here to update the status
-                updateStatus((int) id);
-            }
-        });
-    }
-
-    private void updateStatus(int id) {
-        // Call your DAO method to update the status here
-        OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.updateStatusToPending(id);
-        // Refresh the table after updating the status if necessary
-        tb_load();
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        return button;
-    }
-
-    public Object getCellEditorValue() {
-        return label;
-    }
-}
-   
-   
-   
-   
-   class Sold extends DefaultCellEditor {
-        protected JButton button;
-
-        private String label;
-            private JTable table;
-
-
-        public Sold(JTextField textField,JTable table) {
-           super(textField);
-        this.table = table;
-        button = new JButton();
-        button.setOpaque(true);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Set hand cursor
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int row = table.convertRowIndexToModel(table.getEditingRow());
-                Object id = table.getModel().getValueAt(row, 0); // Assuming ID is in the first column
-                // Call DAO method to reject the order
-                soldOrder((int) id);
-            }
-        });
-    }
-
-    private void soldOrder(int id) {
-        // Call DAO method to update order status to "rejected"
-        OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.updateStatusToSold(id);
-        // Refresh the table after updating the status if necessary
-        tb_load();
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        return button;
-    }
-
-    public Object getCellEditorValue() {
-        return label;
-    }
-}
-   
-   
+  
 
 }
