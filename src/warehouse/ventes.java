@@ -52,6 +52,7 @@ public class ventes extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -60,7 +61,7 @@ public class ventes extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Montant total (DA)", "Date"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -73,23 +74,24 @@ public class ventes extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(260, 260, 260)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(487, 487, 487)
+                        .addComponent(jLabel2)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(50, 50, 50)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,7 +142,7 @@ public class ventes extends javax.swing.JPanel {
         };
 
         model.setColumnIdentifiers(new Object[]{
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Montant total (DA) ", "Date"
         });
 
         jTable1.setModel(model);

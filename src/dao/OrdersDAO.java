@@ -1,6 +1,7 @@
 
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -190,20 +191,41 @@ public class OrdersDAO {
         }
     }
     
-          public void updateStatusToSold(int id) {
-        String query = "UPDATE orders SET statut = ? WHERE id = ?";
+    public void updateStatusToSold(int orderId) {
+    String selectQuery = "SELECT o.product_id, o.quantity, p.qt " +
+                         "FROM orders o " +
+                         "JOIN produits p ON o.product_id = p.id " +
+                         "WHERE o.id = ?";
+    String updateStatusQuery = "UPDATE orders SET statut = ? WHERE id = ?";
+    String updateProductQtyQuery = "UPDATE produits SET qt = qt - ? WHERE id = ?";
 
-        try (PreparedStatement pstmt = databaseHandler.getConnection().prepareStatement(query)) {
-            
-            pstmt.setString(1, "sold");
-            pstmt.setInt(2, id);
+    try (Connection connection = databaseHandler.getConnection();
+         PreparedStatement selectStmt = connection.prepareStatement(selectQuery);
+         PreparedStatement updateStatusStmt = connection.prepareStatement(updateStatusQuery);
+         PreparedStatement updateProductQtyStmt = connection.prepareStatement(updateProductQtyQuery)) {
 
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Set orderId to the PreparedStatement
+        selectStmt.setInt(1, orderId);
+        ResultSet resultSet = selectStmt.executeQuery();
+        if (resultSet.next()) {
+            int productId = resultSet.getInt("product_id");
+            int quantitySold = resultSet.getInt("quantity");
+
+            // Update the quantity in produits table by subtracting quantitySold
+            updateProductQtyStmt.setInt(1, quantitySold);
+            updateProductQtyStmt.setInt(2, productId);
+            updateProductQtyStmt.executeUpdate();
+
+            // Update the status of the order
+            updateStatusStmt.setString(1, "sold");
+            updateStatusStmt.setInt(2, orderId);
+            updateStatusStmt.executeUpdate();
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
-    
+}
+
 
    
 
