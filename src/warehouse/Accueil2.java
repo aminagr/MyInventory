@@ -767,7 +767,7 @@ fournisseurs a = new fournisseurs();
         jPanel8.removeAll();
         
         
-produitslow a = new produitslow();
+produitslow1 a = new produitslow1();
  jpload.jPanelLoader(jPanel8, a); 
         
 
@@ -779,7 +779,7 @@ produitslow a = new produitslow();
         jPanel8.removeAll();
         
         
-produitsout a = new produitsout();
+produitsout1 a = new produitsout1();
  jpload.jPanelLoader(jPanel8, a); 
     }//GEN-LAST:event_nbzMouseClicked
 
@@ -788,7 +788,7 @@ JpanelLoader jpload = new JpanelLoader();
         jPanel8.removeAll();
         
         
-produitsout a = new produitsout();
+produitsout1 a = new produitsout1();
  jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
@@ -797,7 +797,7 @@ produitsout a = new produitsout();
         jPanel8.removeAll();
         
         
-produitslow a = new produitslow();
+produitslow1 a = new produitslow1();
  jpload.jPanelLoader(jPanel8, a); 
 
 
@@ -845,7 +845,7 @@ JpanelLoader jpload = new JpanelLoader();
         jPanel8.removeAll();
         
         
-produitsout a = new produitsout();
+produitsout1 a = new produitsout1();
  jpload.jPanelLoader(jPanel8, a);    }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked

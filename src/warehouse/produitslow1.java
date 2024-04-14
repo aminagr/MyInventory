@@ -30,10 +30,10 @@ import javax.swing.table.TableModel;
  *
  * @author amina
  */
-public class produits extends javax.swing.JPanel {
+public class produitslow1 extends javax.swing.JPanel {
 
     
-    public produits() {
+    public produitslow1() {
         initComponents();
         jTable1.setRowHeight(128);
         tb_load();
@@ -79,7 +79,7 @@ ProviderDAO pddd = new ProviderDAO();
         dt.setRowCount(0);
 
         ProductDAO prd = new ProductDAO();
-        List<Product> productList = prd.getAllProducts();
+        List<Product> productList = prd.getLowProducts();
 
         for (Product product : productList) {
             Object[] rowData = {
@@ -493,7 +493,7 @@ ProviderDAO pddd = new ProviderDAO();
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel10.setText("GERER LES PRODUITS");
+        jLabel10.setText("GERER LES PRODUITS EN FIN DE STOCK");
 
         labelajouter.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         labelajouter.setText("AJOUTER UN PRODUIT ");
@@ -505,13 +505,13 @@ ProviderDAO pddd = new ProviderDAO();
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(238, 238, 238)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(labelajouter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
@@ -519,7 +519,7 @@ ProviderDAO pddd = new ProviderDAO();
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
@@ -768,7 +768,7 @@ private void updateTable(List<Product> productList) {
         if (index != -1) {
             
             
-              int response = JOptionPane.showConfirmDialog(produits.this,
+              int response = JOptionPane.showConfirmDialog(produitslow1.this,
                 "Voulez vous vraiment supprimer ce produit?", " Confirmation de suppression", JOptionPane.YES_NO_OPTION);
 
         if (response == JOptionPane.YES_OPTION) {
