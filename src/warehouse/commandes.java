@@ -3,6 +3,7 @@ package warehouse;
 
 import dao.Orders;
 import dao.OrdersDAO;
+import dao.User;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
@@ -26,9 +27,10 @@ import javax.swing.table.TableCellRenderer;
  */
 public class commandes extends javax.swing.JPanel {
 
-   
+   private User currentUser;
     
-    public commandes() {
+    public commandes(User user) {
+         this.currentUser = user;
         initComponents();
         tb_load();
     }
@@ -194,7 +196,7 @@ JpanelLoader jpload = new JpanelLoader();
         jPanel1.removeAll();
         
         
-ajouter_commande a = new ajouter_commande();
+ajouter_commande a = new ajouter_commande(currentUser);
  jpload.jPanelLoader(jPanel1, a);
     }//GEN-LAST:event_jLabel3MouseClicked
 

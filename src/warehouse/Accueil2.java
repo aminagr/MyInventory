@@ -6,6 +6,7 @@ import dao.ClientDAO;
 import dao.OrdersDAO;
 import dao.ProductDAO;
 import dao.ProviderDAO;
+import dao.User;
 
 
 
@@ -15,9 +16,10 @@ import dao.ProviderDAO;
  */
 public class Accueil2 extends javax.swing.JPanel {
 
-    
-    public Accueil2() {
+    private User currentUser;
+    public Accueil2(User user) {
         initComponents();
+         this.currentUser = user;
           AfficherV();
     }
 
@@ -837,7 +839,7 @@ ventes a = new ventes();
         jPanel8.removeAll();
         
         
-commandes a = new commandes();
+commandes a = new commandes(currentUser);
  jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jPanel9MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked

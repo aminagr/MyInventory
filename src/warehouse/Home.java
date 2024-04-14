@@ -24,12 +24,12 @@ public class Home extends javax.swing.JFrame {
         
         
         this.currentUser = user;
-        //this.setExtendedState(Home.MAXIMIZED_BOTH);
+   
         
         
         
         initComponents();
-          Accueil2 a = new Accueil2();
+          Accueil2 a = new Accueil2(user);
           
         jpload.jPanelLoader(panel_reload, a);
     
@@ -588,7 +588,7 @@ fournisseurs a = new fournisseurs();
         jpload.jPanelLoader(panel_reload, a);     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-commandes a = new commandes();
+commandes a = new commandes(currentUser);
 
  jpload.jPanelLoader(panel_reload, a);  
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -606,7 +606,7 @@ jpload.jPanelLoader(panel_reload, a);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        Accueil2 a = new Accueil2();
+        Accueil2 a = new Accueil2(currentUser);
 
         jpload.jPanelLoader(panel_reload, a);
     }//GEN-LAST:event_jLabel10MouseClicked

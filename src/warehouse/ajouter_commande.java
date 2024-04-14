@@ -5,17 +5,32 @@
  */
 package warehouse;
 
+import dao.OrdersDAO;
+import dao.User;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL-10
  */
 public class ajouter_commande extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ajouter_commande
-     */
-    public ajouter_commande() {
+  private User currentUser;
+    public ajouter_commande(User user) {
+         this.currentUser = user;
+     
         initComponents();
+     
+    ;
+      
+      
+      
+      
+      
+      
     }
 
     /**
@@ -34,10 +49,10 @@ public class ajouter_commande extends javax.swing.JPanel {
         pid = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        pid1 = new javax.swing.JTextField();
+        cid = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        pid2 = new javax.swing.JTextField();
+        qt = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
 
@@ -60,16 +75,16 @@ public class ajouter_commande extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("ID du client");
 
-        pid1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        pid1.setBorder(null);
+        cid.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cid.setBorder(null);
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Quantité");
 
-        pid2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        pid2.setBorder(null);
+        qt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        qt.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -100,9 +115,9 @@ public class ajouter_commande extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addGap(82, 82, 82)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pid2)
+                            .addComponent(qt)
                             .addComponent(jSeparator3)
-                            .addComponent(pid1)
+                            .addComponent(cid)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
@@ -123,14 +138,14 @@ public class ajouter_commande extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(pid1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(pid2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(qt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
@@ -172,11 +187,55 @@ public class ajouter_commande extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+String prid = pid.getText();
+String clid = cid.getText();
+String qty = qt.getText();
+ int idd=   currentUser.getId();
+
+try {
+    OrdersDAO ordersDAO = new OrdersDAO();
+int productId = Integer.parseInt(prid);
+                    int clientId = Integer.parseInt(clid);
+                    int quantity = Integer.parseInt(qty);
+
+                    
+                    if (!ordersDAO.isSufficientQuantity(productId, quantity)) {
+        JOptionPane.showMessageDialog(ajouter_commande.this, "Quantité insuffisante du produit.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return; // Exit the method if quantity is insufficient
+    }
+                    
+                    
+                    // Pass the values to the addOrder method
+                    ordersDAO.addOrder(productId, clientId, idd, quantity);
+                     
+                 JOptionPane.showMessageDialog(ajouter_commande.this, "Commande ajoutée!"); 
+                 
+                   JpanelLoader jpload = new JpanelLoader();
+        jPanel1.removeAll();
+        
+        
+commandes a = new commandes(currentUser);
+ jpload.jPanelLoader(jPanel1, a);
+                 
+                 
+                } catch (NumberFormatException ex) {
+                    // Handle invalid input
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(ajouter_commande.this, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                } catch (IllegalArgumentException ex) {
+                    // Handle product or client ID not found
+                    JOptionPane.showMessageDialog(ajouter_commande.this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+          Logger.getLogger(ajouter_commande.class.getName()).log(Level.SEVERE, null, ex);
+      }
+            
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cid;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -188,7 +247,6 @@ public class ajouter_commande extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField pid;
-    private javax.swing.JTextField pid1;
-    private javax.swing.JTextField pid2;
+    private javax.swing.JTextField qt;
     // End of variables declaration//GEN-END:variables
 }

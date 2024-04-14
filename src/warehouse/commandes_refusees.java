@@ -55,13 +55,13 @@ public class commandes_refusees extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "", ""
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -142,7 +142,7 @@ public class commandes_refusees extends javax.swing.JPanel {
         };
 
         model.setColumnIdentifiers(new Object[]{
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "Accepter", "Refuser"
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date"
         });
 
         jTable1.setModel(model);
@@ -159,19 +159,12 @@ public class commandes_refusees extends javax.swing.JPanel {
                     order.getClientName(),
                     order.getQuantity(),
                     order.getAmount(),
-                    order.getOrderDate(),
-                    "Accepter",
-                    "Restaurer"
+                    order.getOrderDate()
+                 
             });
         }
 
-        // Add button column renderer and editor for "Accepter"
-        jTable1.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(7).setCellEditor(new Accept(new JTextField(), jTable1));
-
-        // Add button column renderer and editor for "Refuser"
-        jTable1.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(8).setCellEditor(new Reject(new JTextField(),jTable1));
+       
 
     } catch (Exception e) {
         System.out.println(e);
@@ -179,103 +172,7 @@ public class commandes_refusees extends javax.swing.JPanel {
 }
 
 
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-   class Accept extends DefaultCellEditor {
-    protected JButton button;
-
-    private String label;
-    private JTable table;
-
-    public Accept(JTextField textField, JTable table) {
-        super(textField);
-        this.table = table;
-        button = new JButton();
-        button.setOpaque(true);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Set hand cursor
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int row = table.convertRowIndexToModel(table.getEditingRow());
-                Object id = table.getModel().getValueAt(row, 0); // Assuming ID is in the first column
-                // Call your DAO method here to update the status
-                updateStatus((int) id);
-            }
-        });
-    }
-
-    private void updateStatus(int id) {
-        // Call your DAO method to update the status here
-        OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.updateStatusToAccepted(id);
-        // Refresh the table after updating the status if necessary
-        tb_load();
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        return button;
-    }
-
-    public Object getCellEditorValue() {
-        return label;
-    }
-}
-   
-   
-   
-   
-   class Reject extends DefaultCellEditor {
-        protected JButton button;
-
-        private String label;
-            private JTable table;
-
-
-        public Reject(JTextField textField,JTable table) {
-           super(textField);
-        this.table = table;
-        button = new JButton();
-        button.setOpaque(true);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Set hand cursor
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int row = table.convertRowIndexToModel(table.getEditingRow());
-                Object id = table.getModel().getValueAt(row, 0); // Assuming ID is in the first column
-                // Call DAO method to reject the order
-                rejectOrder((int) id);
-            }
-        });
-    }
-
-    private void rejectOrder(int id) {
-        // Call DAO method to update order status to "rejected"
-        OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.updateStatusToPending(id);
-        // Refresh the table after updating the status if necessary
-        tb_load();
-    }
-
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        return button;
-    }
-
-    public Object getCellEditorValue() {
-        return label;
-    }
-}
+    
    
    
 

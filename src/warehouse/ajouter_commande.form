@@ -92,9 +92,9 @@
                               </Group>
                               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="pid2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="qt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="pid1" max="32767" attributes="0"/>
+                                  <Component id="cid" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jSeparator1" pref="204" max="32767" attributes="0"/>
@@ -123,7 +123,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="pid1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cid" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="pid2" min="-2" max="-2" attributes="0"/>
+                              <Component id="qt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
@@ -177,7 +177,7 @@
                 <Property name="text" type="java.lang.String" value="ID du client"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="pid1">
+            <Component class="javax.swing.JTextField" name="cid">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
@@ -202,7 +202,7 @@
                 <Property name="text" type="java.lang.String" value="Quantit&#xe9;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="pid2">
+            <Component class="javax.swing.JTextField" name="qt">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
