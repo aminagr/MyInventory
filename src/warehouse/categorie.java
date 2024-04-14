@@ -281,10 +281,10 @@ public class categorie extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(edit)
-                .addGap(251, 251, 251)
                 .addComponent(deletecat)
-                .addGap(166, 166, 166))
+                .addGap(311, 311, 311)
+                .addComponent(edit)
+                .addGap(161, 161, 161))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,14 +310,16 @@ public class categorie extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17)))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(deletecat))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(edit))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(deletecat))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(edit))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -340,6 +342,15 @@ public class categorie extends javax.swing.JPanel {
 
         int index = TableCat.getSelectedRow();
         if (index != -1) {
+            
+             int response = JOptionPane.showConfirmDialog(categorie.this,
+                "Voulez vous vraiment supprimer cete catégorie?", " Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+
+        if (response == JOptionPane.YES_OPTION) {
+            
+            
+            
+            
             TableModel model = TableCat.getModel();
             int id = (int) model.getValueAt(index,0);
 
@@ -348,26 +359,12 @@ public class categorie extends javax.swing.JPanel {
             refreshTable();
             JOptionPane.showMessageDialog(this, "categorie supprimée avec succès");
 
-        }
+        }}
         else {
             JOptionPane.showMessageDialog(this, "veuillez selectionner une catégorie à supprimer.");
         }
 
-        /*
-        if (selectedRow != -1) {
-            int categoryId = (int) TableCat.getValueAt(selectedRow, 0);
-            cd.deleteCategory(categoryId);
-            JOptionPane.showMessageDialog(this, "categorie supprimée avec succès");
-
-            refreshTable();
-            //clearForm();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
-        }
-
-        */
-
-        // TODO add your handling code here:
+ 
     }//GEN-LAST:event_deletecatActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed

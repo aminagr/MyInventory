@@ -70,31 +70,39 @@ public class ClientDAO {
         }
     }
 
-    public Client searchClient(int clientId) {
-        String query = "SELECT * FROM client WHERE id=?";
-        Client client = null;
+   public List<Client> searchClient(String searchKeyword) {
+    String query = "SELECT * FROM client WHERE id=? OR nom LIKE ? OR adresse LIKE ? OR phone LIKE ? OR mail LIKE ?";
+    List<Client> searchResults = new ArrayList<>();
 
-        try (Connection connection = databaseHandler.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+    try (Connection connection = databaseHandler.getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, clientId);
+        // Set searchKeyword to all parameters
+        preparedStatement.setString(1, searchKeyword);
+        preparedStatement.setString(2, "%" + searchKeyword + "%");
+        preparedStatement.setString(3, "%" + searchKeyword + "%");
+        preparedStatement.setString(4, "%" + searchKeyword + "%");
+        preparedStatement.setString(5, "%" + searchKeyword + "%");
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    client = new Client();
-                    client.setId(resultSet.getInt("id"));
-                    client.setName(resultSet.getString("nom"));
-                    client.setAddress(resultSet.getString("adresse"));
-                    client.setPhone(resultSet.getString("phone"));
-                    client.setMail(resultSet.getString("mail"));
-                }
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                Client client = new Client();
+                client.setId(resultSet.getInt("id"));
+                client.setName(resultSet.getString("nom"));
+                client.setAddress(resultSet.getString("adresse"));
+                client.setPhone(resultSet.getString("phone"));
+                client.setMail(resultSet.getString("mail"));
+                searchResults.add(client);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return client;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return searchResults;
+}
+
+
 
     public String[] getClientNames() {
         List<String> clientNames = new ArrayList<>();

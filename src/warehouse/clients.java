@@ -4,8 +4,10 @@ package warehouse;
 import dao.Client;
 import dao.ClientDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -20,6 +22,8 @@ public class clients extends javax.swing.JPanel {
         initComponents();
        tb_load();
        updt.setVisible(false);
+       idt.setVisible(false);
+       idf.setVisible(false);
     }
        public void tb_load(){
            
@@ -88,12 +92,14 @@ public class clients extends javax.swing.JPanel {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         ajt = new javax.swing.JLabel();
+        idt = new javax.swing.JLabel();
+        idf = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        searchc = new javax.swing.JTextField();
+        searchField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         add = new javax.swing.JButton();
         updt = new javax.swing.JButton();
@@ -254,24 +260,38 @@ public class clients extends javax.swing.JPanel {
         ajt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         ajt.setText("AJOUTER UN CLIENT");
 
+        idt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        idt.setText("ID");
+
+        idf.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(ajt)
                 .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(idt)
+                        .addGap(48, 48, 48)
+                        .addComponent(idf)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ajt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(idt)
+                    .addComponent(idf))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -280,11 +300,21 @@ public class clients extends javax.swing.JPanel {
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/delete-32.png"))); // NOI18N
         jButton4.setBorder(null);
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/edit-3-32.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -301,8 +331,8 @@ public class clients extends javax.swing.JPanel {
             }
         });
 
-        searchc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        searchc.setBorder(null);
+        searchField.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchField.setBorder(null);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -314,7 +344,7 @@ public class clients extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchc, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(106, 106, 106))
@@ -327,7 +357,7 @@ public class clients extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchc)))
+                    .addComponent(searchField)))
         );
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
@@ -407,7 +437,7 @@ public class clients extends javax.swing.JPanel {
                         .addComponent(add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(updt)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -423,6 +453,36 @@ public class clients extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+
+                                   
+    String nom = nomf.getText();
+    String mail = mailf.getText();
+    String num = numf.getText();
+    String ad = adressf.getText();
+
+    if (nom.isEmpty() || mail.isEmpty() || num.isEmpty() || ad.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        Client client = new Client();
+        client.setName(nom);
+        client.setMail(mail);
+        client.setPhone(num);
+        client.setAddress(ad);
+
+        ClientDAO clientDAO = new ClientDAO();
+        clientDAO.addClient(client);
+        refreshTable();
+        JOptionPane.showMessageDialog(null, "Client ajouté avec succès.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout du client.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+
+
     }//GEN-LAST:event_addActionPerformed
 
     private void numfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numfActionPerformed
@@ -434,21 +494,158 @@ public class clients extends javax.swing.JPanel {
     }//GEN-LAST:event_nomfActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-/*
-String searchKeyword = searchc.getText();
-ClientDAO c = new ClientDAO();
-List<Client> searchResults = c.searchClient(searchKeyword);
-                updateTable(searchResults);
 
-*/
+    String searchKeyword = searchField.getText(); 
+
+    
+        ClientDAO clientDao = new ClientDAO();
+        List<Client> searchResults = clientDao.searchClient(searchKeyword);
+        updateTable(searchResults);
+    
+}
+
+private void updateTable(List<Client> clientList) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Clear existing rows
+
+    for (Client client : clientList) {
+        model.addRow(new Object[]{
+            client.getId(),
+            client.getName(),
+            client.getAddress(),
+            client.getPhone(),
+            client.getMail()
+        });
+    }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void updtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updtActionPerformed
-        // TODO add your handling code here:
+String nom = nomf.getText();
+String mail = mailf.getText();
+String num = numf.getText();
+String ad = adressf.getText();
+int id;
+
+try {
+    id = Integer.parseInt(idf.getText());
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "ID invalide. Veuillez entrer une valeur numérique valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
+if (nom.isEmpty() || mail.isEmpty() || num.isEmpty() || ad.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
+try {
+    ClientDAO dao = new ClientDAO();
+    Client client = new Client();
+    client.setId(id);
+    client.setName(nom);
+    client.setMail(mail);
+    client.setPhone(num);
+    client.setAddress(ad);
+
+    dao.updateClient(client);
+    refreshTable();
+    JOptionPane.showMessageDialog(this, "Client mis à jour avec succès.");
+    add.setVisible(true);
+    updt.setVisible(false);
+    idf.setVisible(false);
+    idt.setVisible(false);
+    ajt.setText("AJOUTER UN CLIENT");
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Une erreur s'est produite lors de la mise à jour du client.", "Erreur", JOptionPane.ERROR_MESSAGE);
+}
+
     }//GEN-LAST:event_updtActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+
+
+
+  int index = jTable1.getSelectedRow();
+        if (index != -1) {
+            
+             int response = JOptionPane.showConfirmDialog(clients.this,
+                "Voulez vous vraiment supprimer ce client?", " Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+
+        if (response == JOptionPane.YES_OPTION) {
+            
+            
+            
+            
+            TableModel model = jTable1.getModel();
+            int id = (int) model.getValueAt(index,0);
+
+            ClientDAO caa = new ClientDAO();
+            caa.deleteClient(id);
+            refreshTable();
+            JOptionPane.showMessageDialog(this, "client supprimé avec succès");
+
+        }}
+        else {
+            JOptionPane.showMessageDialog(this, "veuillez selectionner un client à supprimer.");
+        }
+
+ 
+
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+int index = jTable1.getSelectedRow();
+if (index != -1) {
+    TableModel model = jTable1.getModel();
+
+    int id = (int) model.getValueAt(index, 0);
+    String nom = (String) model.getValueAt(index, 1);
+    String mail = (String) model.getValueAt(index, 2);
+    String numero = (String) model.getValueAt(index, 3);
+    String adresse = (String) model.getValueAt(index, 4);
+
+    // Set the values to your text fields
+    idf.setText(String.valueOf(id));
+    nomf.setText(nom);
+    mailf.setText(mail);
+    numf.setText(numero);
+    adressf.setText(adresse);
+
+    // Make necessary UI adjustments
+    idf.setVisible(true);
+    idt.setVisible(true);
+    add.setVisible(false);
+    updt.setVisible(true);
+    ajt.setText("MODIFIER LE CLIENT");
+} else {
+    JOptionPane.showMessageDialog(this, "Veuillez sélectionner un client à éditer.");
+}
+
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     
-    
+    private void refreshTable() {
+    ClientDAO dao = new ClientDAO();
+    List<Client> list = dao.getAllClients(); 
+
+    DefaultTableModel newTableModel = new DefaultTableModel(new Object[]{"ID", "Nom", "Mail", "Numéro", "Adresse"}, 0);
+
+    for (Client client : list) {
+        Object[] rowData = {client.getId(), client.getName(), client.getMail(), client.getPhone(), client.getAddress()};
+        newTableModel.addRow(rowData);
+    }
+
+    jTable1.setModel(newTableModel);
+}
+
     
     
     
@@ -459,6 +656,8 @@ List<Client> searchResults = c.searchClient(searchKeyword);
     private javax.swing.JButton add;
     private javax.swing.JTextField adressf;
     private javax.swing.JLabel ajt;
+    private javax.swing.JLabel idf;
+    private javax.swing.JLabel idt;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -481,7 +680,7 @@ List<Client> searchResults = c.searchClient(searchKeyword);
     private javax.swing.JTextField mailf;
     private javax.swing.JTextField nomf;
     private javax.swing.JTextField numf;
-    private javax.swing.JTextField searchc;
+    private javax.swing.JTextField searchField;
     private javax.swing.JButton updt;
     // End of variables declaration//GEN-END:variables
 }
