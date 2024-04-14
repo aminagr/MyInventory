@@ -3,6 +3,7 @@ package warehouse;
 
 import dao.CategoryDAO;
 import dao.ClientDAO;
+import dao.OrdersDAO;
 import dao.ProductDAO;
 import dao.ProviderDAO;
 
@@ -54,6 +55,27 @@ public class Accueil2 extends javax.swing.JPanel {
          int n6 = cs.getTotalCount();
          String sn6 = Integer.toString(n6); 
          nbcl.setText(sn6);
+         
+         OrdersDAO od = new OrdersDAO();
+         double n7 = od.calculateNetGain();
+         String sn7 = Double.toString(n7);
+         profit.setText(sn7);
+         
+         double n8 = od.calculateTotalRevenue();
+         String sn8 = Double.toString(n8);
+         revenue.setText(sn8);
+         
+         
+         int n9 = od.getTotalPendingOrders();
+         String sn9 = Integer.toString(n9);
+         cmd.setText(sn9);
+         
+         int n10 = od.getTotalSoldOrders();
+         String sn10 = Integer.toString(n10);
+         sold.setText(sn10);
+         
+         
+         
     }
    
     @SuppressWarnings("unchecked")
@@ -89,25 +111,26 @@ public class Accueil2 extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        sold = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        cmd = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        revenue = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
+        profit = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
@@ -161,6 +184,7 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel2MouseClicked(evt);
@@ -220,6 +244,12 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel3.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/out-of-stock.png"))); // NOI18N
 
@@ -271,6 +301,12 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel4.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/categories.png"))); // NOI18N
 
@@ -323,6 +359,12 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel5.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/entrepreneur_12308654.png"))); // NOI18N
 
@@ -368,6 +410,12 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel6.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/team_476861.png"))); // NOI18N
 
@@ -407,6 +455,21 @@ public class Accueil2 extends javax.swing.JPanel {
         );
 
         jPanel7.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jPanel7AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/purchased_12341370.png"))); // NOI18N
 
@@ -414,9 +477,9 @@ public class Accueil2 extends javax.swing.JPanel {
         jLabel21.setForeground(new java.awt.Color(0, 102, 204));
         jLabel21.setText("VENTES");
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel22.setText("0");
+        sold.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        sold.setForeground(new java.awt.Color(0, 102, 204));
+        sold.setText("0");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -429,7 +492,7 @@ public class Accueil2 extends javax.swing.JPanel {
                         .addComponent(jLabel20))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel22)
+                        .addComponent(sold)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel21)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -442,11 +505,17 @@ public class Accueil2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jLabel22))
+                    .addComponent(sold))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel9.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel9MouseClicked(evt);
+            }
+        });
 
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/icons8-order-64.png"))); // NOI18N
 
@@ -454,9 +523,9 @@ public class Accueil2 extends javax.swing.JPanel {
         jLabel27.setForeground(new java.awt.Color(0, 102, 204));
         jLabel27.setText("COMMANDES");
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel28.setText("0");
+        cmd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmd.setForeground(new java.awt.Color(0, 102, 204));
+        cmd.setText("0");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -464,7 +533,7 @@ public class Accueil2 extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel28)
+                .addComponent(cmd)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
@@ -479,7 +548,7 @@ public class Accueil2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jLabel28))
+                    .addComponent(cmd))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -491,9 +560,9 @@ public class Accueil2 extends javax.swing.JPanel {
         jLabel30.setForeground(new java.awt.Color(0, 102, 204));
         jLabel30.setText("DA REVENUE");
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel31.setText("0");
+        revenue.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        revenue.setForeground(new java.awt.Color(0, 102, 204));
+        revenue.setText("0");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -501,7 +570,7 @@ public class Accueil2 extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31)
+                .addComponent(revenue)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -519,11 +588,16 @@ public class Accueil2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jLabel31))
+                    .addComponent(revenue))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel11.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warehouse/images/icons8-profit-64.png"))); // NOI18N
 
@@ -531,9 +605,9 @@ public class Accueil2 extends javax.swing.JPanel {
         jLabel33.setForeground(new java.awt.Color(0, 102, 204));
         jLabel33.setText("DA PROFIT");
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel34.setText("0");
+        profit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        profit.setForeground(new java.awt.Color(0, 102, 204));
+        profit.setText("0");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -541,7 +615,7 @@ public class Accueil2 extends javax.swing.JPanel {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel34)
+                .addComponent(profit)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -560,7 +634,7 @@ public class Accueil2 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(jLabel34))
+                    .addComponent(profit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -643,7 +717,12 @@ produits a = new produits();
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 
         
-
+JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+produits a = new produits();
+ jpload.jPanelLoader(jPanel8, a);
 
         
     }//GEN-LAST:event_jPanel1MouseClicked
@@ -726,8 +805,72 @@ produitslow a = new produitslow();
 
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+
+
+ JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+clients a = new clients();
+ jpload.jPanelLoader(jPanel8, a); 
+
+
+
+
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+ JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+ventes a = new ventes();
+ jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+ JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+commandes a = new commandes();
+ jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jPanel9MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+produitsout a = new produitsout();
+ jpload.jPanelLoader(jPanel8, a);    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+categorie a = new categorie();
+ jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+JpanelLoader jpload = new JpanelLoader();
+        jPanel8.removeAll();
+        
+        
+fournisseurs a = new fournisseurs();
+ jpload.jPanelLoader(jPanel8, a);     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel7AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel7AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel7AncestorAdded
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cmd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -739,16 +882,12 @@ produitslow a = new produitslow();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -770,5 +909,8 @@ produitslow a = new produitslow();
     private javax.swing.JLabel nbfs;
     private javax.swing.JLabel nbp;
     private javax.swing.JLabel nbz;
+    private javax.swing.JLabel profit;
+    private javax.swing.JLabel revenue;
+    private javax.swing.JLabel sold;
     // End of variables declaration//GEN-END:variables
 }

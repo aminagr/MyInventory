@@ -52,6 +52,7 @@ public class commandes_acceptees extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -73,21 +74,22 @@ public class commandes_acceptees extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(260, 260, 260)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(326, 326, 326)
+                        .addComponent(jLabel2)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(50, 50, 50)
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -140,7 +142,7 @@ public class commandes_acceptees extends javax.swing.JPanel {
         };
 
         model.setColumnIdentifiers(new Object[]{
-                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "Accepter", "Refuser"
+                "ID", "ID du produit", "Nom du produit", "Client", "Quantité", "Total", "Date", "Restaurer", "Vendu"
         });
 
         jTable1.setModel(model);
@@ -159,17 +161,17 @@ public class commandes_acceptees extends javax.swing.JPanel {
                     order.getAmount(),
                     order.getOrderDate(),
                     "Restaurer",
-                    "Refuser"
+                    "Vendu"
             });
         }
 
         // Add button column renderer and editor for "Accepter"
         jTable1.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(7).setCellEditor(new Accept(new JTextField(), jTable1));
+        jTable1.getColumnModel().getColumn(7).setCellEditor(new Restaurer(new JTextField(), jTable1));
 
         // Add button column renderer and editor for "Refuser"
         jTable1.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
-        jTable1.getColumnModel().getColumn(8).setCellEditor(new Reject(new JTextField(),jTable1));
+        jTable1.getColumnModel().getColumn(8).setCellEditor(new Sold(new JTextField(),jTable1));
 
     } catch (Exception e) {
         System.out.println(e);
@@ -189,13 +191,13 @@ public class commandes_acceptees extends javax.swing.JPanel {
         }
     }
 
-   class Accept extends DefaultCellEditor {
+   class Restaurer extends DefaultCellEditor {
     protected JButton button;
 
     private String label;
     private JTable table;
 
-    public Accept(JTextField textField, JTable table) {
+    public Restaurer(JTextField textField, JTable table) {
         super(textField);
         this.table = table;
         button = new JButton();
@@ -233,14 +235,14 @@ public class commandes_acceptees extends javax.swing.JPanel {
    
    
    
-   class Reject extends DefaultCellEditor {
+   class Sold extends DefaultCellEditor {
         protected JButton button;
 
         private String label;
             private JTable table;
 
 
-        public Reject(JTextField textField,JTable table) {
+        public Sold(JTextField textField,JTable table) {
            super(textField);
         this.table = table;
         button = new JButton();
@@ -251,15 +253,15 @@ public class commandes_acceptees extends javax.swing.JPanel {
                 int row = table.convertRowIndexToModel(table.getEditingRow());
                 Object id = table.getModel().getValueAt(row, 0); // Assuming ID is in the first column
                 // Call DAO method to reject the order
-                rejectOrder((int) id);
+                soldOrder((int) id);
             }
         });
     }
 
-    private void rejectOrder(int id) {
+    private void soldOrder(int id) {
         // Call DAO method to update order status to "rejected"
         OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.updateStatusToRejected(id);
+        ordersDAO.updateStatusToSold(id);
         // Refresh the table after updating the status if necessary
         tb_load();
     }

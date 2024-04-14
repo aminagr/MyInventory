@@ -12,6 +12,7 @@ public class Product {
     private String name;
     private int quantity;
     private double price;
+    private double pricev;
     private int categoryId;
     private int providerId;
     private String images;
@@ -43,7 +44,7 @@ public class Product {
         
     } 
        
-        public Product(int id, String name, int quantity, double price,
+        public Product(int id, String name, int quantity, double price, double pricev,
                 String codeBar, String categoryName, String providerName, List<String> imagess) {
      
         
@@ -58,6 +59,28 @@ public class Product {
        this.categoryName = categoryName;
        this.providerName = providerName;
         this.imagess = imagess;
+        this.pricev=pricev;
+    } 
+       
+        
+        
+        
+         public Product(int id, String name, int quantity, double price,
+                String codeBar, String categoryName, String providerName, List<String> imagess) {
+     
+        
+         this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.providerId = providerId;
+       
+        this.codeBar = codeBar;
+       this.categoryName = categoryName;
+       this.providerName = providerName;
+        this.imagess = imagess;
+      
     } 
        
      
@@ -149,4 +172,16 @@ public class Product {
     public void setProviderName(String providerName) {
         this.providerName = providerName;}
     
+
+
+
+ public double getPricev() {
+        return pricev;
+    }
+
+    // Setter method for pricev
+    public void setPricev(double pricev) {
+        this.pricev = pricev;
+    }
+
 }
