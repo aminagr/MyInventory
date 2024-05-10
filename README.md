@@ -7,7 +7,7 @@ MyInventory is a Java Swing application designed for inventory managers to manag
 - **Category Management**: Create, search, edit, and delete categories for better organization and navigation.
 - **Supplier Management**: Manage suppliers information by creating, searching, editing, and deleting supplier details.
 - **Employee Management**: Manage employees by creating, searching, editing, and deleting employee information for better team coordination.
-- **Order Management**: Create, confirm, or reject orders seamlessly within the application.
+- **Order Management**: Create, confirm, or reject orders seamlessly within the application. Orders can be added manually by the admin through the application or by the client via the integrated website.
 - **Stock Management**: Monitor low stock and out-of-stock products to ensure timely replenishment.
 - **Financial Insights**: Calculate and display total gains, net gains, and other financial metrics to assess business performance.
 - **E-commerce Integration**: Connect with an e-commerce website to enable online product browsing, ordering, and purchasing by clients.
