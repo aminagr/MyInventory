@@ -34,6 +34,13 @@ Here are some screenshots of MyInventory application. Please note that the inter
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/9d2400da-58a1-4fa6-a671-f5630c5b63ee)
 
 
+## Contributing
+
+Contributions to MyInventory are welcome! Here are a few ways you can contribute:
+
+- **Bug Reports**: If you encounter any issues with the application, feel free to report them.
+- **Feature Requests**: Have an idea for a new feature or improvement? Share your suggestions.
+- **Pull Requests**: If you'd like to contribute directly to the codebase, you can fork the repository, make your changes, and submit a pull request. Please ensure that your code adheres to the project's coding standards.
 
 
 
