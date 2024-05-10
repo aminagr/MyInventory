@@ -34,6 +34,17 @@ Here are some screenshots of MyInventory application. Please note that the inter
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/9d2400da-58a1-4fa6-a671-f5630c5b63ee)
 
 
+## How to Use
+
+1. **Installation**: Clone or download the MyInventory application files from the GitHub repository.
+2. **MySQL Setup**: Set up a MySQL database by importing the provided SQL file (`warehouse.sql`) located in the project's repository. 
+3. **NetBeans Configuration** : Open the downloaded project in NetBeans IDE.
+4. **Database Connection**: Configure the database connection settings in the project to match your MySQL database credentials.
+5. **Run Application**: Locate the main class file and run the application.
+6. **Login**: Upon opening the application, log in using your credentials to access the main dashboard.
+7. Start your exploration of the application's features and effectively manage your inventory!
+
+
 ## Contributing
 
 Contributions to MyInventory are welcome! Here are a few ways you can contribute:
