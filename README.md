@@ -7,9 +7,11 @@ This app will be complemented by an e-commerce website to allow clients to brows
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/0ad5b93b-d354-4cec-8d8c-bec417997a4c)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/d1b55353-e80d-44d5-a75a-f08a2ef17161)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/e7506938-3702-48ee-833b-6d22ca5ce150)
+![image](https://github.com/aminagr/Warehouse_3/assets/36279270/37e5f4a9-1b60-4dbc-95d2-bb59cca120bd)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/a806ea9a-9fad-4af5-92ef-49f41e81c339)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/3d263fd6-414e-4b9e-89d8-34c50da1a936)
 ![image](https://github.com/aminagr/Warehouse_3/assets/36279270/56046eb0-15c0-4c95-a188-ae9c64308953)
+![image](https://github.com/aminagr/Warehouse_3/assets/36279270/9d2400da-58a1-4fa6-a671-f5630c5b63ee)
 
 
 
