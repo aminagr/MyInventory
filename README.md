@@ -9,7 +9,7 @@ MyInventory is a Java Swing application designed for inventory managers to manag
 - **Employee Management**: Manage employees by creating, searching, editing, and deleting employee information for better team coordination.
 - **Order Management**: Create, confirm, or reject orders seamlessly within the application. Orders can be added manually by the admin through the application or by the client by making an order online through the integrated website.
 - **Stock Management**: Monitor low stock and out-of-stock products to ensure timely replenishment.
-- **Financial Insights**: Calculate and display total gains, net gains, and other financial metrics to assess business performance.
+- **Financial Insights**: Calculate and display total gains and net gains to assess business performance.
 - **E-commerce Integration**: Connect with an e-commerce website to enable online product browsing, ordering, and purchasing by clients.
 
 
@@ -51,7 +51,7 @@ Contributions to MyInventory are welcome! Here are a few ways you can contribute
 
 - **Bug Reports**: If you encounter any issues with the application, feel free to report them.
 - **Feature Requests**: Have an idea for a new feature or improvement? Share your suggestions.
-- **Pull Requests**: If you'd like to contribute directly to the codebase, you can fork the repository, make your changes, and submit a pull request. Please ensure that your code adheres to the project's coding standards.
+- **Pull Requests**: If you'd like to contribute directly to the codebase, you can fork the repository, make your changes, and submit a pull request. 
 
 
 
